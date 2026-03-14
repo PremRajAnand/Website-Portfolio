@@ -3,247 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Royal Plate | Premium Dining</title>
+    <title>The Cake Canvas | Gourmet Bakery & Custom Cakes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap');
-        
-        .font-serif { font-family: 'Playfair Display', serif; }
-        .font-sans { font-family: 'Poppins', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Sacramento&display=swap');
+        .font-hand { font-family: 'Sacramento', cursive; }
+        .font-main { font-family: 'Quicksand', sans-serif; }
+        .bg-pastle { background-color: #fdf6f0; }
     </style>
 </head>
-<body class="bg-[#0f0f0f] text-gray-200 font-sans">
+<body class="bg-pastle font-main text-gray-800">
 
-    <nav class="absolute w-full z-50 flex justify-between items-center px-8 md:px-16 py-6 bg-transparent">
-        <div class="text-3xl font-serif font-bold text-amber-500 tracking-tighter">
-            ROYAL<span class="text-white">PLATE</span>
-        </div>
-        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-semibold">
-            <a href="#" class="hover:text-amber-500 transition">Home</a>
-            <a href="#menu" class="hover:text-amber-500 transition">Menu</a>
-            <a href="#about" class="hover:text-amber-500 transition">Our Story</a>
-            <a href="#reservation" class="hover:text-amber-500 transition border border-amber-500 px-5 py-2 -mt-2 rounded-full">Book Table</a>
+    <nav class="flex justify-between items-center px-8 py-6 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="text-3xl font-hand font-bold text-pink-500">The Cake Canvas</div>
+        <div class="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-wider">
+            <a href="#" class="hover:text-pink-500 transition">Our Cakes</a>
+            <a href="#custom" class="hover:text-pink-500 transition">Custom Design</a>
+            <a href="#delivery" class="hover:text-pink-500 transition">Delivery</a>
+            <a href="#order" class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 shadow-lg transition">Order Online</a>
         </div>
     </nav>
 
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80" alt="Food Background" class="w-full h-full object-cover opacity-40">
-        </div>
-        <div class="relative z-10 text-center px-4">
-            <h4 class="text-amber-500 uppercase tracking-[0.3em] mb-4 font-semibold">Authentic & Delicious</h4>
-            <h1 class="text-5xl md:text-8xl font-serif text-white mb-6">A Taste of Luxury</h1>
-            <p class="max-w-xl mx-auto text-gray-400 mb-10 text-lg">Experience the perfect blend of spices and traditions. We serve more than just food; we serve memories.</p>
-            <div class="flex justify-center gap-6">
-                <a href="#menu" class="bg-amber-600 text-white px-8 py-4 rounded-full font-bold hover:bg-amber-700 transition shadow-lg">Explore Menu</a>
-                <a href="#contact" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition">Contact Us</a>
+    <section class="relative h-[80vh] flex items-center overflow-hidden">
+        <div class="container mx-auto px-8 grid md:grid-cols-2 gap-8 items-center relative z-10">
+            <div>
+                <h4 class="text-pink-500 font-bold uppercase tracking-widest mb-4">100% Eggless & Fresh</h4>
+                <h1 class="text-6xl md:text-8xl font-hand text-gray-900 mb-6">Baked with Love, Decorated with Dreams</h1>
+                <p class="text-lg text-gray-600 mb-8">Jehanabad ki sabse behtareen bakery jahan har cake ek kahani sunata hai. Birthday ho ya Wedding, hum banate hain har pal ko khaas.</p>
+                <div class="flex gap-4">
+                    <button class="bg-pink-500 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:scale-105 transition">View Catalog</button>
+                    <button class="border-2 border-pink-500 text-pink-500 px-8 py-4 rounded-xl font-bold hover:bg-pink-50 transition">Custom Query</button>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -inset-4 bg-pink-200 rounded-full blur-3xl opacity-30"></div>
+                <img src="https://cdn.shopify.com/s/files/1/0549/5819/4901/files/Cake_Design_for_Chocolate_Inspiring_Ideas_and_Techniques__1__0004.jpg?auto=format&fit=crop&q=80" alt="Special Cake" class="relative z-10 rounded-3xl rotate-3 shadow-2xl">
             </div>
         </div>
     </section>
 
-    <section id="menu" class="py-24 px-8 md:px-16 bg-[#161616]">
+    <section class="py-24 px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-6xl font-serif text-white mb-4">Chef's Special</h2>
-                <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Har Budget, Har Swaad</h2>
+                <p class="text-gray-500">Hamare categories aapki har zaroorat ko pura karti hain.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-10">
-                <div class="group cursor-pointer">
-                    <div class="overflow-hidden rounded-2xl mb-4 h-64">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group p-8 rounded-3xl bg-pink-50 border border-pink-100 hover:shadow-2xl transition">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6">
+                        <i class="fas fa-birthday-cake text-2xl text-pink-500"></i>
                     </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-bold text-white uppercase">Smoked BBQ Ribs</h3>
-                        <span class="text-amber-500 font-bold">₹799</span>
-                    </div>
-                    <p class="text-sm text-gray-500">Slow-cooked ribs with house-made honey glaze sauce and herbs.</p>
+                    <h3 class="text-2xl font-bold mb-4 tracking-tight">Daily Delights</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Chote celebrations ke liye fresh aur saste cakes. Pineapple, Butterscotch, aur Vanilla flavors.</p>
+                    <div class="text-pink-600 font-bold text-xl mb-4">Starts @ ₹299</div>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check mr-2"></i> Instant Pick-up</li>
+                        <li><i class="fas fa-check mr-2"></i> 100% Eggless</li>
+                    </ul>
                 </div>
 
-                <div class="group cursor-pointer">
-                    <div class="overflow-hidden rounded-2xl mb-4 h-64">
-                        <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="group p-8 rounded-3xl bg-pink-500 text-white transform scale-105 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 bg-white/20 rounded-bl-3xl font-bold text-xs uppercase">Bestseller</div>
+                    <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center shadow-sm mb-6 text-white">
+                        <i class="fas fa-star text-2xl"></i>
                     </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-bold text-white uppercase">Royal Tandoori Platter</h3>
-                        <span class="text-amber-500 font-bold">₹1299</span>
-                    </div>
-                    <p class="text-sm text-gray-500">A mix of Malai Tikka, Seekh Kebab, and Paneer Special.</p>
+                    <h3 class="text-2xl font-bold mb-4 tracking-tight">Premium Treats</h3>
+                    <p class="opacity-90 mb-6 text-sm">Double layer, Belgian Chocolate, Red Velvet aur Fresh Fruit cakes. Special moments ke liye.</p>
+                    <div class="font-bold text-xl mb-4">Starts @ ₹749</div>
+                    <ul class="text-sm opacity-90 space-y-2">
+                        <li><i class="fas fa-check mr-2"></i> Free Home Delivery</li>
+                        <li><i class="fas fa-check mr-2"></i> Personalized Message</li>
+                    </ul>
                 </div>
 
-                <div class="group cursor-pointer">
-                    <div class="overflow-hidden rounded-2xl mb-4 h-64">
-                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="group p-8 rounded-3xl bg-pink-50 border border-pink-100 hover:shadow-2xl transition">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6">
+                        <i class="fas fa-crown text-2xl text-pink-500"></i>
                     </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-bold text-white uppercase">Italian Pasta Carbonara</h3>
-                        <span class="text-amber-500 font-bold">₹549</span>
-                    </div>
-                    <p class="text-sm text-gray-500">Creamy white sauce pasta with exotic mushrooms and olives.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 px-8 md:px-16 bg-[#0f0f0f]">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
-            <div class="md:w-1/2">
-                <img src="https://b.zmtcdn.com/data/pictures/8/100438/1aaa8a2d327b6e2cf1841d79f434ba70.jpg?auto=format&fit=crop&q=80" class="rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition duration-700">
-            </div>
-            <div class="md:w-1/2">
-                <h4 class="text-amber-500 font-bold uppercase mb-4">Our Philosophy</h4>
-                <h2 class="text-4xl md:text-5xl font-serif text-white mb-6">Why Dine at Royal Plate?</h2>
-                <div class="space-y-8">
-                    <div class="flex items-start">
-                        <i class="fas fa-leaf text-amber-500 text-2xl mt-1 mr-4"></i>
-                        <div>
-                            <h4 class="text-xl font-bold text-white">Fresh Ingredients</h4>
-                            <p class="text-gray-400">Hum har sabzi aur masala seedha kisanon se aur asli jagahon se mangwate hain.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fas fa-hat-chef text-amber-500 text-2xl mt-1 mr-4"></i>
-                        <div>
-                            <h4 class="text-xl font-bold text-white">Master Chefs</h4>
-                            <p class="text-gray-400">Hamare chefs ke paas world-class restaurant ka tajurba (experience) hai.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fas fa-music text-amber-500 text-2xl mt-1 mr-4"></i>
-                        <div>
-                            <h4 class="text-xl font-bold text-white">Perfect Ambience</h4>
-                            <p class="text-gray-400">Light music aur premium seating ke saath aapka dinner yaadgaar banega.</p>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold mb-4 tracking-tight">Royal Custom</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Tiered Wedding cakes aur Theme based designs (Fondant). Jaisa aap sochein, waisa hum banayein.</p>
+                    <div class="text-pink-600 font-bold text-xl mb-4">Starts @ ₹1499</div>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check mr-2"></i> Dedicated Cake Artist</li>
+                        <li><i class="fas fa-check mr-2"></i> Tasting Session Free</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-amber-500 text-black">
-    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-8 items-center">
-        <div class="md:col-span-1">
-            <h2 class="text-3xl font-serif font-bold leading-tight">Exclusive <br>Online Offers</h2>
-        </div>
-        <div class="bg-black/10 p-6 rounded-2xl border border-black/20">
-            <h4 class="font-bold text-xl mb-1">Happy Hours</h4>
-            <p class="text-sm">4 PM - 7 PM tak sabhi Mocktails par <span class="font-bold">Flat 20% Off</span>.</p>
-        </div>
-        <div class="bg-black/10 p-6 rounded-2xl border border-black/20">
-            <h4 class="font-bold text-xl mb-1">Birthday Special</h4>
-            <p class="text-sm">Apna birthday humare saath manayein aur payein <span class="font-bold">Complimentary Cake</span>.</p>
-        </div>
-        <div class="bg-black/10 p-6 rounded-2xl border border-black/20">
-            <h4 class="font-bold text-xl mb-1">First Booking</h4>
-            <p class="text-sm">Pehli baar online table book karne par <span class="font-bold">Free Appetizer</span> payein.</p>
-        </div>
-    </div>
-</section>
-
-<section class="py-24 px-8 md:px-16 bg-[#0a0a0a]">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
-        <div class="md:w-1/2 grid grid-cols-2 gap-4">
-            <div class="space-y-4">
-                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80" class="rounded-2xl h-48 w-full object-cover border border-gray-800" alt="Hospitality">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80" class="rounded-2xl h-64 w-full object-cover border border-gray-800" alt="Staff">
-            </div>
-            <div class="space-y-4 mt-8">
-                <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80" class="rounded-2xl h-64 w-full object-cover border border-gray-800" alt="Parking">
-                <img src="https://images.unsplash.com/photo-1590577976322-3d2d6e2130d5?auto=format&fit=crop&q=80" class="rounded-2xl h-48 w-full object-cover border border-gray-800" alt="Music">
-            </div>
-        </div>
-        
-        <div class="md:w-1/2">
-            <h4 class="text-amber-500 font-bold uppercase mb-4">Extraordinary Service</h4>
-            <h2 class="text-4xl font-serif text-white mb-8">Mehmaan-Nawazi Jo Dil Jeet Le</h2>
+    <section class="py-20 px-8 bg-gray-900 text-white overflow-hidden relative">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <h2 class="text-4xl font-bold mb-6 font-hand text-pink-400">Complete Celebration Pack</h2>
+            <p class="mb-8 opacity-80">Sirf cake hi nahi, hum pura celebration handle karte hain.</p>
             
-            <ul class="space-y-6">
-                <li class="flex items-center gap-4">
-                    <div class="bg-amber-500/10 p-3 rounded-full text-amber-500"><i class="fas fa-parking"></i></div>
-                    <div>
-                        <h4 class="text-white font-bold">Valet Parking</h4>
-                        <p class="text-gray-400 text-sm">Parking ki chinta chodein, hamare attendants aapki gaadi ka khayal rakhenge.</p>
-                    </div>
-                </li>
-                <li class="flex items-center gap-4">
-                    <div class="bg-amber-500/10 p-3 rounded-full text-amber-500"><i class="fas fa-wifi"></i></div>
-                    <div>
-                        <h4 class="text-white font-bold">High-Speed Wi-Fi</h4>
-                        <p class="text-gray-600 text-sm">Aapki business meetings ya social media updates ke liye free connectivity.</p>
-                    </div>
-                </li>
-                <li class="flex items-center gap-4">
-                    <div class="bg-amber-500/10 p-3 rounded-full text-amber-500"><i class="fas fa-baby-carriage"></i></div>
-                    <div>
-                        <h4 class="text-white font-bold">Kids Play Area</h4>
-                        <p class="text-gray-400 text-sm">Bacchon ke liye ek surakshit aur mazedaar khelne ki jagah.</p>
-                    </div>
-                </li>
-            </ul>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                    <i class="fas fa-gift text-pink-400 mb-2"></i>
+                    <h5 class="font-bold text-sm">Birthday Props</h5>
+                    <p class="text-[10px] opacity-60">Sash, Crowns, aur Candles ka set.</p>
+                </div>
+                <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                    <i class="fas fa-balloon text-pink-400 mb-2"></i>
+                    <h5 class="font-bold text-sm">Balloon Decor</h5>
+                    <p class="text-[10px] opacity-60">Ghar baithe decoration ki service.</p>
+                </div>
+                <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                    <i class="fas fa-cookie text-pink-400 mb-2"></i>
+                    <h5 class="font-bold text-sm">Return Gifts</h5>
+                    <p class="text-[10px] opacity-60">Customized Cookies aur Jar Cakes.</p>
+                </div>
+                <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                    <i class="fas fa-camera-retro text-pink-400 mb-2"></i>
+                    <h5 class="font-bold text-sm">Event Photog</h5>
+                    <p class="text-[10px] opacity-60">Professional photography add-on.</p>
+                </div>
+            </div>
+        </div>
+        <div class="relative group">
+            <img src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?auto=format&fit=crop&q=80" class="rounded-[40px] grayscale group-hover:grayscale-0 transition duration-700 shadow-2xl">
+            <div class="absolute -bottom-6 -left-6 bg-pink-500 p-8 rounded-3xl">
+                <div class="text-3xl font-bold">Flat 15% OFF</div>
+                <div class="text-xs uppercase tracking-widest">On First Combo Order</div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="py-24 px-8 md:px-16 bg-[#111]">
+    <section class="py-24 px-8 md:px-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            <div class="md:w-1/2">
+                <h4 class="text-pink-500 font-bold uppercase mb-4">Why Order From Us?</h4>
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Service Jo Mithaas Ghol De</h2>
+                
+                <div class="space-y-8">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm text-pink-500"><i class="fas fa-truck-fast text-2xl"></i></div>
+                        <div>
+                            <h4 class="font-bold text-xl">Midnight Delivery</h4>
+                            <p class="text-gray-500 text-sm italic">Surprise dena hai? Hum raat 12 baje bhi cake deliver karte hain.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm text-pink-500"><i class="fas fa-camera text-2xl"></i></div>
+                        <div>
+                            <h4 class="font-bold text-xl">Live Baking Photos</h4>
+                            <p class="text-gray-500 text-sm">Aapka cake kaise ban raha hai, hum uska photo ya video WhatsApp par bhejte hain.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm text-pink-500"><i class="fas fa-smile-wink text-2xl"></i></div>
+                        <div>
+                            <h4 class="font-bold text-xl">Hygiene Guarantee</h4>
+                            <p class="text-gray-500 text-sm">Puri tarah sanitized kitchen aur gloves ke saath baking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1557925923-33b27f891f88?auto=format&fit=crop&q=80" class="rounded-3xl h-64 w-full object-cover">
+                <img src="https://www.deliciaecakes.com/static/56e329a7431b39a81652c7f6ad9ab424/e9589/3d-2436.webp?auto=format&fit=crop&q=80" class="rounded-3xl h-64 w-full object-cover mt-12">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-8 bg-white border-y border-pink-100">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+        <div class="md:w-1/2">
+            <h2 class="text-4xl font-bold mb-6">What's Inside?</h2>
+            <p class="text-gray-600 mb-8">Hum sirf bahar se khoobsurat nahi, andar se bhi lajawab banate hain.</p>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-pink-500 pl-6">
+                    <h4 class="font-bold text-lg">Soft Sponge Base</h4>
+                    <p class="text-sm text-gray-500 italic">Melt-in-mouth texture jo har bite mein mithaas ghol de.</p>
+                </div>
+                <div class="border-l-4 border-pink-300 pl-6">
+                    <h4 class="font-bold text-lg">Silky Ganache & Fillings</h4>
+                    <p class="text-sm text-gray-500">Premium Belgian chocolate aur asli fruit pulps ki layering.</p>
+                </div>
+                <div class="border-l-4 border-pink-100 pl-6">
+                    <h4 class="font-bold text-lg">Fresh Whipped Cream</h4>
+                    <p class="text-sm text-gray-500">Light aur airy cream jo bahut zyada meethi nahi hoti.</p>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 bg-pink-50 p-10 rounded-[50px] relative">
+            <div class="text-center font-hand text-3xl text-pink-500 mb-4">"The Perfect Slice"</div>
+            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80" class="rounded-2xl shadow-xl">
+        </div>
+    </div>
+</section>
+
+<section id="custom" class="py-24 px-8 bg-pastle">
     <div class="max-w-7xl mx-auto text-center mb-16">
-        <h4 class="text-amber-500 font-bold uppercase tracking-widest mb-2">Our Spaces</h4>
-        <h2 class="text-4xl md:text-5xl font-serif text-white">Choose Your Comfort</h2>
-        <p class="text-gray-400 mt-4">Aapke har mauke (occasion) ke liye alag ehsas.</p>
+        <h2 class="text-4xl font-bold mb-4 font-hand">Apna Dream Cake Banwayein</h2>
+        <div class="w-24 h-1 bg-pink-500 mx-auto"></div>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-[#1a1a1a] p-8 rounded-3xl border border-gray-800 hover:border-amber-500 transition">
-            <div class="text-amber-500 text-4xl mb-6"><i class="fas fa-couch"></i></div>
-            <h3 class="text-2xl font-serif text-white mb-4">Casual Zone</h3>
-            <p class="text-gray-400 text-sm mb-6">Friends aur family ke saath halki-phulki guftagu aur tasty snacks ke liye behtareen jagah.</p>
-            <span class="bg-green-900/30 text-green-500 px-4 py-1 rounded-full text-xs font-bold uppercase">Budget Friendly</span>
+    <div class="grid md:grid-cols-4 gap-8">
+        <div class="text-center">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-pink-500 font-bold text-xl border-2 border-pink-200">1</div>
+            <h4 class="font-bold mb-2">Pick a Theme</h4>
+            <p class="text-xs text-gray-500">Cartoon, Wedding, Anniversary ya koi bhi photo humein bhejien.</p>
         </div>
-
-        <div class="bg-[#1a1a1a] p-8 rounded-3xl border-2 border-amber-500 transform scale-105 shadow-2xl relative">
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-500 text-black px-4 py-1 rounded-full text-xs font-bold uppercase">Most Popular</div>
-            <div class="text-amber-500 text-4xl mb-6"><i class="fas fa-utensils"></i></div>
-            <h3 class="text-2xl font-serif text-white mb-4">Premium Dining</h3>
-            <p class="text-gray-400 text-sm mb-6">Comfortable cushioned sofas, light ambient music, aur behtareen service. Family dinner ke liye perfect.</p>
-            <span class="bg-amber-900/30 text-amber-500 px-4 py-1 rounded-full text-xs font-bold uppercase">Medium Budget</span>
+        <div class="text-center">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-pink-500 font-bold text-xl border-2 border-pink-200">2</div>
+            <h4 class="font-bold mb-2">Select Flavor</h4>
+            <p class="text-xs text-gray-500">30+ unique flavors jaise Nutella, Lotus Biscoff, ya Classic Vanilla.</p>
         </div>
-
-        <div class="bg-[#1a1a1a] p-8 rounded-3xl border border-gray-800 hover:border-amber-500 transition">
-            <div class="text-amber-500 text-4xl mb-6"><i class="fas fa-crown"></i></div>
-            <h3 class="text-2xl font-serif text-white mb-4">Royal VIP Suite</h3>
-            <p class="text-gray-400 text-sm mb-6">Private cabin, dedicated server, aur customized menu. Business meetings ya special dates ke liye.</p>
-            <span class="bg-purple-900/30 text-purple-500 px-4 py-1 rounded-full text-xs font-bold uppercase">Premium Luxury</span>
+        <div class="text-center">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-pink-500 font-bold text-xl border-2 border-pink-200">3</div>
+            <h4 class="font-bold mb-2">Finalize Size</h4>
+            <p class="text-xs text-gray-500">0.5 KG se lekar 10 KG+ tak ke multi-tier grand cakes.</p>
+        </div>
+        <div class="text-center">
+            <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-white font-bold text-xl">4</div>
+            <h4 class="font-bold mb-2">Get it Delivered</h4>
+            <p class="text-xs text-gray-500">Hum safe aur chilled delivery van mein cake aapke ghar bhejenge.</p>
         </div>
     </div>
 </section>
 
-    <section id="reservation" class="py-24 px-8 bg-amber-600">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-serif text-white mb-8">Make A Reservation</h2>
-            <form class="grid md:grid-cols-3 gap-4">
-                <input type="text" placeholder="Your Name" class="p-4 rounded-lg bg-white/20 border border-white/30 text-white placeholder:text-white/70 outline-none focus:bg-white/30">
-                <input type="tel" placeholder="Phone Number" class="p-4 rounded-lg bg-white/20 border border-white/30 text-white placeholder:text-white/70 outline-none focus:bg-white/30">
-                <input type="date" class="p-4 rounded-lg bg-white/20 border border-white/30 text-white outline-none focus:bg-white/30">
-                <select class="p-4 rounded-lg bg-white/20 border border-white/30 text-white outline-none focus:bg-white/30">
-                    <option class="text-black">2 Persons</option>
-                    <option class="text-black">4 Persons</option>
-                    <option class="text-black">6+ Persons</option>
-                </select>
-                <input type="time" class="p-4 rounded-lg bg-white/20 border border-white/30 text-white outline-none focus:bg-white/30">
-                <button class="bg-black text-white p-4 rounded-lg font-bold hover:bg-gray-800 transition uppercase tracking-widest">Book Now</button>
+    <section id="order" class="py-24 px-8 bg-pink-500 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto bg-white rounded-[40px] shadow-2xl p-10 md:p-16 relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-hand text-pink-600 mb-2">Book Your Cake</h2>
+                <p class="text-gray-500">Apni pasand ka design aur flavor humein batayein.</p>
+            </div>
+            <form class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <input type="text" placeholder="Full Name" class="w-full p-4 rounded-xl bg-gray-50 border-none outline-pink-500">
+                    <input type="tel" placeholder="Mobile Number" class="w-full p-4 rounded-xl bg-gray-50 border-none outline-pink-500">
+                    <select class="w-full p-4 rounded-xl bg-gray-50 border-none outline-pink-500">
+                        <option>Select Flavor</option>
+                        <option>Chocolate Truffle</option>
+                        <option>Red Velvet</option>
+                        <option>Fruit Forest</option>
+                        <option>Custom/Other</option>
+                    </select>
+                </div>
+                <div class="space-y-4">
+                    <input type="date" class="w-full p-4 rounded-xl bg-gray-50 border-none outline-pink-500">
+                    <textarea placeholder="Any Special Message on Cake?" class="w-full p-4 rounded-xl bg-gray-50 border-none outline-pink-500 h-32"></textarea>
+                </div>
+                <button class="md:col-span-2 bg-pink-500 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-pink-600 transition uppercase tracking-widest">Submit Order Request</button>
             </form>
         </div>
     </section>
 
-    <footer class="py-16 bg-black px-8 text-center border-t border-gray-800">
-        <div class="text-2xl font-serif text-amber-500 mb-6">ROYAL<span class="text-white">PLATE</span></div>
-        <div class="flex justify-center space-x-6 mb-8">
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-2xl"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-2xl"></i></a>
+    <footer class="bg-white py-12 text-center border-t border-pink-100">
+        <div class="text-3xl font-hand text-pink-500 mb-6">The Cake Canvas</div>
+        <p class="text-gray-500 mb-6 max-w-sm mx-auto">Jehanabad's #1 Premium Bakery. Serving sweetness since 2015.</p>
+        <div class="flex justify-center space-x-6 text-pink-500 mb-8">
+            <a href="#"><i class="fab fa-instagram text-2xl"></i></a>
+            <a href="#"><i class="fab fa-whatsapp text-2xl"></i></a>
         </div>
-        <p class="text-gray-600 text-sm">© 2026 Royal Plate Restaurant. All rights reserved.</p>
-        <p class="text-gray-600 text-xs mt-2">123 Foodie Street, Jehanabad, Bihar</p>
+        <div class="text-xs text-gray-400">© 2026 The Cake Canvas. All Rights Reserved.</div>
     </footer>
 
 </body>
