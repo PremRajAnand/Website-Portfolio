@@ -2,196 +2,217 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>HTML Compiler Tool</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Compiler Tool By Tech Masaala</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --accent: #6366f1;
-            --border: #334155;
+            --bg: #0d1117;
+            --panel: #161b22;
+            --accent: #58a6ff;
+            --success: #238636;
+            --danger: #f85149;
+            --border: #30363d;
+            --text: #c9d1d9;
         }
 
-        body { 
-            margin: 0; background: var(--bg-dark); 
-            color: white; font-family: 'Inter', sans-serif;
-            overflow-y: auto; /* Allow main page scroll */
-        }
-
-        /* Toolbar Fixed */
-        header {
-            position: sticky; top: 0; z-index: 1000;
-            height: 60px; background: #1e293b;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 20px; border-bottom: 2px solid var(--border);
-        }
-
-        /* Layout Container */
-        .master-wrapper {
-            display: flex; min-height: calc(100vh - 60px);
-        }
-
-        /* Horizontal Layout (Default) */
-        .master-wrapper.side-by-side { flex-direction: row; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         
-        /* Vertical Layout (Scroll Flow) */
-        .master-wrapper.top-bottom { flex-direction: column; }
+        body { background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* Editor Section */
-        .editor-section {
-            flex: 1; min-height: 400px;
-            border-right: 1px solid var(--border);
-            background: #282a36;
+        /* Dashboard Header */
+        header {
+            background: var(--panel);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
         }
 
-        /* Indentation Guides (The 'Lines' you asked for) */
-        .cm-indent-guide {
-            border-left: 1px solid #44475a;
-            margin-left: -1px;
-        }
+        .brand-title { font-size: 15px; font-weight: bold; color: white; }
+        .brand-title a { color: var(--accent); text-decoration: none; }
 
-        /* Result Section - Full Space No Cut */
-        .result-section {
-            flex: 1; background: #f8fafc;
-            display: flex; flex-direction: column;
-            align-items: center; padding: 20px;
-            min-height: 600px; /* Ensure space for results */
-        }
-
-        .preview-frame {
-            width: 100%; height: 100%; min-height: 500px;
-            background: white; border: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 4px;
-        }
-
-        /* Device Presets */
-        .mobile { width: 375px; height: 667px !important; border: 10px solid #222; border-radius: 20px; }
-        .tablet { width: 768px; height: 1024px !important; border: 10px solid #222; border-radius: 15px; }
+        .btn-group { display: flex; gap: 6px; align-items: center; }
 
         .btn {
-            background: var(--accent); color: white; border: none;
-            padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: 600;
+            background: #21262d; color: white; border: 1px solid var(--border);
+            padding: 7px 12px; border-radius: 6px; cursor: pointer;
+            font-size: 13px; display: flex; align-items: center; gap: 6px; transition: 0.2s;
         }
-        .btn-run { background: #22c55e; }
 
-        /* CodeMirror custom height */
-        .CodeMirror { height: 100%; min-height: 400px; font-size: 16px; }
+        .btn:hover:not(:disabled) { background: #30363d; border-color: #8b949e; }
+        .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        
+        .btn-run { background: var(--success); border: none; font-weight: bold; }
+        .btn-run:hover { background: #2ea043; }
+        
+        .btn-clean { color: var(--danger); border-color: var(--danger); }
+        .btn-clean:hover { background: rgba(248, 81, 73, 0.1); }
+        
+        .btn-active { border-color: var(--accent); color: var(--accent); background: rgba(88, 166, 255, 0.1); }
+
+        /* Workspace */
+        #workspace { display: flex; flex: 1; overflow: hidden; }
+        .split-v { flex-direction: row; }
+        .split-h { flex-direction: column; }
+
+        .panel { flex: 1; display: flex; flex-direction: column; padding: 10px; min-width: 0; }
+        .label { font-size: 11px; font-weight: bold; color: #8b949e; margin-bottom: 5px; text-transform: uppercase; }
+
+        #editor {
+            flex: 1; background: #010409; color: #79c0ff; border: 1px solid var(--border);
+            border-radius: 8px; padding: 15px; font-family: 'Consolas', monospace;
+            font-size: 14px; outline: none; resize: none; line-height: 1.5;
+        }
+
+        .preview-wrapper { flex: 1; background: white; border-radius: 8px; overflow: hidden; display: flex; }
+        iframe { width: 100%; height: 100%; border: none; background: white; }
+
+        /* Device Sizes */
+        .mobile-mode { width: 375px; height: 600px; margin: auto; border: 12px solid #30363d; border-radius: 20px; }
+        .tablet-mode { width: 700px; height: 90%; margin: auto; border: 8px solid #30363d; border-radius: 12px; }
     </style>
 </head>
 <body>
 
 <header>
-<div>
-  <strong>HTML Compiler Tool</strong>
-  <small>
-    By <a href="https://techmasaala.com" target="_blank" class="tm-link">Tech Masaala</a>
-  </small>
-</div>
+    <div class="brand-title">
+        HTML Compiler Tool By <a href="https://techmasaala.com/" target="_blank">Tech Masaala</a>
+    </div>
 
-<style>
-.tm-link{
-  color: white;
-  text-decoration: none;
-  transition: 0.3s;
-}
+    <div class="btn-group">
+        <button class="btn btn-run" onclick="render()"><i class="fas fa-play"></i> RUN</button>
+        <div style="width:1px; height:20px; background:var(--border); margin:0 5px;"></div>
+        <button class="btn" id="undoBtn" onclick="undo()" title="Undo"><i class="fas fa-undo"></i></button>
+        <button class="btn" id="redoBtn" onclick="redo()" title="Redo"><i class="fas fa-redo"></i></button>
+        <button class="btn" onclick="copyCode()"><i class="fas fa-copy"></i> Copy</button>
+        <button class="btn" onclick="smartPaste()"><i class="fas fa-paste"></i> Paste & Replace</button>
+        <button class="btn btn-clean" onclick="cleanDashboard()"><i class="fas fa-eraser"></i> Clean</button>
+    </div>
 
-.tm-link:hover{
-  color: yellow;
-}
-</style>
-    <div style="display:flex; gap:10px;">
-        <select id="device" onchange="resizePreview()" style="padding:5px; border-radius:4px;">
-            <option value="full">Original Desktop</option>
-            <option value="tablet">Tablet View</option>
-            <option value="mobile">Mobile View</option>
-        </select>
-        <button class="btn" onclick="toggleLayout()">Switch Layout</button>
-        <button class="btn btn-run" onclick="updatePreview()">RUN</button>
+    <div class="btn-group">
+        <button id="d-btn" class="btn btn-active" onclick="setView('desktop')"><i class="fas fa-desktop"></i></button>
+        <button id="t-btn" class="btn" onclick="setView('tablet')"><i class="fas fa-tablet-alt"></i></button>
+        <button id="m-btn" class="btn" onclick="setView('mobile')"><i class="fas fa-mobile-alt"></i></button>
+        <div style="width:1px; height:20px; background:var(--border); margin:0 5px;"></div>
+        <button id="v-btn" class="btn btn-active" onclick="setLayout('v')"><i class="fas fa-columns"></i></button>
+        <button id="h-btn" class="btn" onclick="setLayout('h')"><i class="fas fa-grip-lines"></i></button>
     </div>
 </header>
 
-<div class="master-wrapper side-by-side" id="app">
-    <div class="editor-section">
-        <textarea id="editor">
-<div class="parent">
-    <div class="child">
-        <h1>Hello World</h1>
-        <p>Vertical lines guides ko dekhein.</p>
+<div id="workspace" class="split-v">
+    <div class="panel">
+        <div class="label">Editor</div>
+        <textarea id="editor" spellcheck="false" placeholder="Write HTML here..."></textarea>
+    </div>
+
+    <div class="panel">
+        <div class="label">Live Preview</div>
+        <div id="preview-box" class="preview-wrapper">
+            <iframe id="output"></iframe>
+        </div>
     </div>
 </div>
-
-<style>
-  .parent { padding: 20px; background: #ddd; }
-  .child { margin: 10px; padding: 10px; background: white; border-radius: 8px; }
-</style></textarea>
-    </div>
-
-    <div class="result-section">
-        <iframe id="preview" class="preview-frame"></iframe>
-    </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/xml/xml.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
 
 <script>
-    // Editor Initialization
-    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-        mode: "htmlmixed",
-        theme: "dracula",
-        lineNumbers: true,
-        indentUnit: 4,
-        tabSize: 4,
-        lineWrapping: true,
-        // Yahan 'lines' wala feature activate hota hai
-        activeLine: true,
-        extraKeys: {"Ctrl-Space": "autocomplete"}
-    });
+    const editor = document.getElementById('editor');
+    const iframe = document.getElementById('output');
+    const previewBox = document.getElementById('preview-box');
+    const workspace = document.getElementById('workspace');
 
-    // Custom Function to Add Indent Guides
-    editor.on("renderLine", function(cm, line, elt) {
-        var off = CodeMirror.countColumn(line.text, null, cm.getOption("tabSize"));
-        if (off > 0) {
-            var guide = document.createElement("span");
-            guide.className = "cm-indent-guide";
-            // Lines logic manually handle karne ke liye yahan logic add hota hai
-            // Filhal Dracula theme built-in indentation support karta hai
-        }
-    });
+    // Undo/Redo Logic
+    let historyStack = [""];
+    let currentIndex = 0;
 
-    function updatePreview() {
-        var code = editor.getValue();
-        var frame = document.getElementById("preview").contentWindow.document;
-        frame.open();
-        frame.write(code);
-        frame.close();
+    function render() {
+        const code = editor.value;
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open();
+        doc.write(code);
+        doc.close();
     }
 
-    function toggleLayout() {
-        var app = document.getElementById("app");
-        if(app.classList.contains('side-by-side')) {
-            app.classList.replace('side-by-side', 'top-bottom');
-        } else {
-            app.classList.replace('top-bottom', 'side-by-side');
+    function saveState() {
+        if (editor.value !== historyStack[currentIndex]) {
+            historyStack = historyStack.slice(0, currentIndex + 1);
+            historyStack.push(editor.value);
+            currentIndex++;
+            updateButtons();
         }
     }
 
-    function resizePreview() {
-        var val = document.getElementById("device").value;
-        var frame = document.getElementById("preview");
-        frame.className = "preview-frame"; // reset
-        if(val === "mobile") frame.classList.add("mobile");
-        if(val === "tablet") frame.classList.add("tablet");
-        updatePreview();
+    function undo() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            editor.value = historyStack[currentIndex];
+            render();
+            updateButtons();
+        }
+    }
+
+    function redo() {
+        if (currentIndex < historyStack.length - 1) {
+            currentIndex++;
+            editor.value = historyStack[currentIndex];
+            render();
+            updateButtons();
+        }
+    }
+
+    function updateButtons() {
+        document.getElementById('undoBtn').disabled = (currentIndex === 0);
+        document.getElementById('redoBtn').disabled = (currentIndex === historyStack.length - 1);
+    }
+
+    editor.addEventListener('input', () => {
+        render(); // Auto-render while typing
+        saveState();
+    });
+
+    async function smartPaste() {
+        try {
+            const text = await navigator.clipboard.readText();
+            if (text) {
+                editor.value = text;
+                render();
+                saveState();
+            }
+        } catch (err) { alert("Paste failed"); }
+    }
+
+    function cleanDashboard() {
+        if(confirm("Dashboard clean karein?")) {
+            editor.value = "";
+            render();
+            saveState();
+        }
+    }
+
+    function copyCode() {
+        editor.select();
+        document.execCommand('copy');
+        alert('Copied!');
+    }
+
+    function setView(mode) {
+        previewBox.classList.remove('mobile-mode', 'tablet-mode');
+        ['d-btn', 't-btn', 'm-btn'].forEach(id => document.getElementById(id).classList.remove('btn-active'));
+        if(mode === 'mobile') previewBox.classList.add('mobile-mode');
+        if(mode === 'tablet') previewBox.classList.add('tablet-mode');
+        document.getElementById(mode.charAt(0) + '-btn').classList.add('btn-active');
+    }
+
+    function setLayout(dir) {
+        workspace.className = (dir === 'v') ? 'split-v' : 'split-h';
+        document.getElementById('v-btn').classList.toggle('btn-active', dir === 'v');
+        document.getElementById('h-btn').classList.toggle('btn-active', dir === 'h');
     }
 
     // Initial Load
-    updatePreview();
+    editor.value = "<h1>Tech Masaala Compiler</h1>\n<p>Start editing...</p>";
+    render();
+    updateButtons();
 </script>
 
 </body>
