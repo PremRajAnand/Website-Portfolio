@@ -20,58 +20,80 @@
         
         body { background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* Dashboard Header */
+        /* --- Header & Branding --- */
         header {
             background: var(--panel);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 8px 15px;
             border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .brand-title { font-size: 15px; font-weight: bold; color: white; }
+        .brand-title { 
+            font-size: 14px; 
+            font-weight: bold; 
+            color: white; 
+            text-align: center;
+        }
         .brand-title a { color: var(--accent); text-decoration: none; }
 
-        .btn-group { display: flex; gap: 6px; align-items: center; }
+        /* --- Responsive Toolbar --- */
+        .toolbar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Phone par buttons automatically neeche aa jayenge */
+            gap: 8px;
+        }
+
+        .btn-group { display: flex; gap: 4px; align-items: center; }
 
         .btn {
             background: #21262d; color: white; border: 1px solid var(--border);
-            padding: 7px 12px; border-radius: 6px; cursor: pointer;
-            font-size: 13px; display: flex; align-items: center; gap: 6px; transition: 0.2s;
+            padding: 6px 10px; border-radius: 5px; cursor: pointer;
+            font-size: 12px; display: flex; align-items: center; gap: 5px; transition: 0.2s;
         }
 
-        .btn:hover:not(:disabled) { background: #30363d; border-color: #8b949e; }
+        .btn:hover:not(:disabled) { background: #30363d; }
         .btn:disabled { opacity: 0.3; cursor: not-allowed; }
         
         .btn-run { background: var(--success); border: none; font-weight: bold; }
-        .btn-run:hover { background: #2ea043; }
-        
         .btn-clean { color: var(--danger); border-color: var(--danger); }
-        .btn-clean:hover { background: rgba(248, 81, 73, 0.1); }
-        
         .btn-active { border-color: var(--accent); color: var(--accent); background: rgba(88, 166, 255, 0.1); }
 
-        /* Workspace */
-        #workspace { display: flex; flex: 1; overflow: hidden; }
+        /* --- Workspace Layout --- */
+        #workspace { display: flex; flex: 1; overflow: hidden; padding: 5px; gap: 5px; }
+        
+        /* Mobile Default: Editor Top, Preview Bottom */
+        @media (max-width: 767px) {
+            #workspace { flex-direction: column !important; }
+            header { padding: 10px 5px; }
+        }
+
         .split-v { flex-direction: row; }
         .split-h { flex-direction: column; }
 
-        .panel { flex: 1; display: flex; flex-direction: column; padding: 10px; min-width: 0; }
-        .label { font-size: 11px; font-weight: bold; color: #8b949e; margin-bottom: 5px; text-transform: uppercase; }
+        .panel { flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+        .label { font-size: 10px; color: #8b949e; margin-bottom: 3px; text-transform: uppercase; font-weight: bold; }
 
         #editor {
             flex: 1; background: #010409; color: #79c0ff; border: 1px solid var(--border);
-            border-radius: 8px; padding: 15px; font-family: 'Consolas', monospace;
-            font-size: 14px; outline: none; resize: none; line-height: 1.5;
+            border-radius: 8px; padding: 12px; font-family: 'Consolas', monospace;
+            font-size: 14px; outline: none; resize: none;
         }
 
-        .preview-wrapper { flex: 1; background: white; border-radius: 8px; overflow: hidden; display: flex; }
+        .preview-area { flex: 1; background: white; border-radius: 8px; overflow: hidden; display: flex; transition: 0.3s; }
         iframe { width: 100%; height: 100%; border: none; background: white; }
 
-        /* Device Sizes */
-        .mobile-mode { width: 375px; height: 600px; margin: auto; border: 12px solid #30363d; border-radius: 20px; }
-        .tablet-mode { width: 700px; height: 90%; margin: auto; border: 8px solid #30363d; border-radius: 12px; }
+        /* View Modes */
+        .mode-mobile { width: 360px !important; height: 80% !important; margin: auto; border: 10px solid #30363d; border-radius: 20px; }
+        .mode-tablet { width: 700px !important; height: 90% !important; margin: auto; border: 6px solid #30363d; border-radius: 12px; }
+
+        /* Desktop Header Adjustment */
+        @media (min-width: 1024px) {
+            header { flex-direction: row; justify-content: space-between; padding: 10px 20px; }
+            .brand-title { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -81,35 +103,41 @@
         HTML Compiler Tool By <a href="https://techmasaala.com/" target="_blank">Tech Masaala</a>
     </div>
 
-    <div class="btn-group">
-        <button class="btn btn-run" onclick="render()"><i class="fas fa-play"></i> RUN</button>
-        <div style="width:1px; height:20px; background:var(--border); margin:0 5px;"></div>
-        <button class="btn" id="undoBtn" onclick="undo()" title="Undo"><i class="fas fa-undo"></i></button>
-        <button class="btn" id="redoBtn" onclick="redo()" title="Redo"><i class="fas fa-redo"></i></button>
-        <button class="btn" onclick="copyCode()"><i class="fas fa-copy"></i> Copy</button>
-        <button class="btn" onclick="smartPaste()"><i class="fas fa-paste"></i> Paste & Replace</button>
-        <button class="btn btn-clean" onclick="cleanDashboard()"><i class="fas fa-eraser"></i> Clean</button>
-    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <button class="btn btn-run" onclick="render()"><i class="fas fa-play"></i> RUN</button>
+            <button class="btn" id="undoBtn" onclick="undo()"><i class="fas fa-undo"></i></button>
+            <button class="btn" id="redoBtn" onclick="redo()"><i class="fas fa-redo"></i></button>
+        </div>
 
-    <div class="btn-group">
-        <button id="d-btn" class="btn btn-active" onclick="setView('desktop')"><i class="fas fa-desktop"></i></button>
-        <button id="t-btn" class="btn" onclick="setView('tablet')"><i class="fas fa-tablet-alt"></i></button>
-        <button id="m-btn" class="btn" onclick="setView('mobile')"><i class="fas fa-mobile-alt"></i></button>
-        <div style="width:1px; height:20px; background:var(--border); margin:0 5px;"></div>
-        <button id="v-btn" class="btn btn-active" onclick="setLayout('v')"><i class="fas fa-columns"></i></button>
-        <button id="h-btn" class="btn" onclick="setLayout('h')"><i class="fas fa-grip-lines"></i></button>
+        <div class="btn-group">
+            <button class="btn" onclick="copyCode()"><i class="fas fa-copy"></i> Copy</button>
+            <button class="btn" onclick="smartPaste()"><i class="fas fa-paste"></i> Paste</button>
+            <button class="btn btn-clean" onclick="cleanDashboard()"><i class="fas fa-eraser"></i> Clean</button>
+        </div>
+
+        <div class="btn-group">
+            <button id="d-btn" class="btn btn-active" onclick="setView('desktop')"><i class="fas fa-desktop"></i></button>
+            <button id="t-btn" class="btn" onclick="setView('tablet')"><i class="fas fa-tablet-alt"></i></button>
+            <button id="m-btn" class="btn" onclick="setView('mobile')"><i class="fas fa-mobile-alt"></i></button>
+        </div>
+
+        <div class="btn-group">
+            <button id="v-btn" class="btn btn-active" onclick="setLayout('v')"><i class="fas fa-columns"></i></button>
+            <button id="h-btn" class="btn" onclick="setLayout('h')"><i class="fas fa-grip-lines"></i></button>
+        </div>
     </div>
 </header>
 
 <div id="workspace" class="split-v">
     <div class="panel">
         <div class="label">Editor</div>
-        <textarea id="editor" spellcheck="false" placeholder="Write HTML here..."></textarea>
+        <textarea id="editor" spellcheck="false" placeholder="Enter HTML Code..."></textarea>
     </div>
 
     <div class="panel">
         <div class="label">Live Preview</div>
-        <div id="preview-box" class="preview-wrapper">
+        <div id="preview-wrapper" class="preview-area">
             <iframe id="output"></iframe>
         </div>
     </div>
@@ -118,88 +146,52 @@
 <script>
     const editor = document.getElementById('editor');
     const iframe = document.getElementById('output');
-    const previewBox = document.getElementById('preview-box');
+    const wrapper = document.getElementById('preview-wrapper');
     const workspace = document.getElementById('workspace');
 
-    // Undo/Redo Logic
-    let historyStack = [""];
-    let currentIndex = 0;
+    let history = [""];
+    let idx = 0;
 
     function render() {
-        const code = editor.value;
         const doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.open();
-        doc.write(code);
-        doc.close();
+        doc.open(); doc.write(editor.value); doc.close();
     }
 
-    function saveState() {
-        if (editor.value !== historyStack[currentIndex]) {
-            historyStack = historyStack.slice(0, currentIndex + 1);
-            historyStack.push(editor.value);
-            currentIndex++;
-            updateButtons();
+    function save() {
+        if (editor.value !== history[idx]) {
+            history = history.slice(0, idx + 1);
+            history.push(editor.value);
+            idx++;
+            updateBtns();
         }
     }
 
-    function undo() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            editor.value = historyStack[currentIndex];
-            render();
-            updateButtons();
-        }
+    function undo() { if (idx > 0) { idx--; editor.value = history[idx]; render(); updateBtns(); } }
+    function redo() { if (idx < history.length - 1) { idx++; editor.value = history[idx]; render(); updateBtns(); } }
+
+    function updateBtns() {
+        document.getElementById('undoBtn').disabled = (idx === 0);
+        document.getElementById('redoBtn').disabled = (idx === history.length - 1);
     }
 
-    function redo() {
-        if (currentIndex < historyStack.length - 1) {
-            currentIndex++;
-            editor.value = historyStack[currentIndex];
-            render();
-            updateButtons();
-        }
-    }
-
-    function updateButtons() {
-        document.getElementById('undoBtn').disabled = (currentIndex === 0);
-        document.getElementById('redoBtn').disabled = (currentIndex === historyStack.length - 1);
-    }
-
-    editor.addEventListener('input', () => {
-        render(); // Auto-render while typing
-        saveState();
-    });
+    editor.addEventListener('input', () => { render(); save(); });
 
     async function smartPaste() {
-        try {
-            const text = await navigator.clipboard.readText();
-            if (text) {
-                editor.value = text;
-                render();
-                saveState();
-            }
-        } catch (err) { alert("Paste failed"); }
+        const text = await navigator.clipboard.readText();
+        if (text) { editor.value = text; render(); save(); }
     }
 
     function cleanDashboard() {
-        if(confirm("Dashboard clean karein?")) {
-            editor.value = "";
-            render();
-            saveState();
-        }
+        if(confirm("Sab kuch clear karein?")) { editor.value = ""; render(); save(); }
     }
 
-    function copyCode() {
-        editor.select();
-        document.execCommand('copy');
-        alert('Copied!');
-    }
+    function copyCode() { editor.select(); document.execCommand('copy'); alert('Copied!'); }
 
     function setView(mode) {
-        previewBox.classList.remove('mobile-mode', 'tablet-mode');
+        wrapper.classList.remove('mode-mobile', 'mode-tablet');
         ['d-btn', 't-btn', 'm-btn'].forEach(id => document.getElementById(id).classList.remove('btn-active'));
-        if(mode === 'mobile') previewBox.classList.add('mobile-mode');
-        if(mode === 'tablet') previewBox.classList.add('tablet-mode');
+        if(mode === 'mobile') wrapper.classList.add('mode-mobile');
+        if(mode === 'tablet') wrapper.classList.add('mode-tablet');
         document.getElementById(mode.charAt(0) + '-btn').classList.add('btn-active');
     }
 
@@ -209,10 +201,9 @@
         document.getElementById('h-btn').classList.toggle('btn-active', dir === 'h');
     }
 
-    // Initial Load
-    editor.value = "<h1>Tech Masaala Compiler</h1>\n<p>Start editing...</p>";
-    render();
-    updateButtons();
+    // Default Demo
+    editor.value = "<h2>Tech Masaala Compiler</h2><p>Desktop, Tablet & Mobile ready!</p>";
+    render(); updateBtns();
 </script>
 
 </body>
