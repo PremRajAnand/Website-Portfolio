@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - FeedManthan</title>
+    <link rel="icon" type="image/x-icon" href="https://via.placeholder.com/32x32.png?text=FM">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], },
+                    colors: { primary: '#0B5ED7', secondary: '#FF6A00', dark: '#0f172a' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+    <!-- Navbar Full -->
+    <nav id="navbar" class="w-full z-40 bg-white shadow-sm py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
+                    <span class="font-black text-2xl text-primary tracking-tight"><i class="fas fa-bullhorn text-secondary mr-2"></i>Feed<span class="text-secondary">Manthan</span></span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 items-center text-sm font-semibold">
+                    <a href="index.html#hero" class="text-slate-700 hover:text-primary transition-colors">Home</a>
+                    <a href="about.html" class="text-slate-700 hover:text-primary transition-colors">About Us</a>
+                    <a href="index.html#team" class="text-slate-700 hover:text-primary transition-colors">Our Team</a>
+                    <a href="index.html#services" class="text-slate-700 hover:text-primary transition-colors">Strategy</a>
+                    <a href="index.html#pricing" class="text-slate-700 hover:text-primary transition-colors">Packages</a>
+                    <a href="contact.html" class="bg-gradient-to-r from-primary to-blue-700 text-white px-6 py-2.5 rounded-full hover:shadow-lg hover:shadow-primary/30 transition-all">Contact Us</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-800 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white/95 backdrop-blur-md border-t border-slate-100 shadow-xl absolute w-full left-0 origin-top animate-fade-in mt-4 z-50">
+            <div class="px-4 pt-2 pb-6 space-y-2 font-semibold">
+                <a href="index.html#hero" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Home</a>
+                <a href="about.html" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">About Us</a>
+                <a href="index.html#team" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Our Team</a>
+                <a href="index.html#services" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Strategy</a>
+                <a href="index.html#pricing" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Packages</a>
+                <a href="contact.html" class="block mt-4 px-3 py-3 text-center rounded-full bg-primary text-white shadow-lg mx-3">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if(btn && menu) { btn.addEventListener('click', () => { menu.classList.toggle('hidden'); }); }
+    </script>
+
+    <!-- Header -->
+    <div class="bg-primary pt-20 pb-12 text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-black mb-4">About Us</h1>
+        <p class="text-blue-100 font-medium">The Feed Manthan Story</p>
+    </div>
+
+    <!-- Main Content -->
+    <main class="py-16 max-w-4xl mx-auto px-6">
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-100 space-y-6 text-slate-600 leading-relaxed font-medium">
+            <p>Welcome to Feed Manthan, India’s premier digital-first Marketing and Election Management agency. While our registered correspondence address is located at R-Block, Patna, Bihar (800001), we operate as a modern, 100% decentralized digital powerhouse. We specialize in high-stakes political consulting, digital infrastructure, and brand scaling, serving clients across the country through a seamless online ecosystem.</p>
+            <p>The word "Manthan" refers to the deep churning of the ocean to extract the nectar of immortality. Similarly, at Feed Manthan, we believe that success in the digital age requires the deep churning of data, human psychology, and creative innovation. We don't just "post" on social media; we engineer digital movements that shift public perception and drive tangible results.</p>
+            
+            <h2 class="text-2xl font-bold text-slate-800 mt-10">Our Proven Track Record</h2>
+            <p>We are not newcomers to the field. Feed Manthan has been a silent force behind some of the most intense political battles in the region. Our team has already delivered high-impact results during the previous Bihar Vidhan Sabha Elections. During that period, we managed ground-level digital sentiment, viral content distribution, and real-time candidate branding. Navigating the complex sociopolitical landscape of Bihar has equipped us with the grit, cultural insight, and technical agility to handle any marketing challenge, whether it is a local assembly seat or a national corporate brand launch.</p>
+            
+            <h2 class="text-2xl font-bold text-slate-800 mt-10 border-b pb-4">Our Leadership & Specialized Team</h2>
+            
+            <div class="mt-8 bg-blue-50 p-6 rounded-2xl border-l-4 border-primary">
+                <h3 class="text-xl font-black text-primary">Prem Raj Anand – Founder & CEO</h3>
+                <p class="mt-2">With over 5 years of rigorous experience in the digital marketing landscape, Prem Raj Anand is the visionary force behind Feed Manthan. Prem doesn’t just lead the company; he architects entire marketing ecosystems. His expertise lies in crafting comprehensive marketing strategies that align perfectly with a client's long-term goals. Having worked extensively in the Bihar Vidhan Sabha elections, he understands how to balance digital optics with ground realities.</p>
+                <p class="mt-2">Prem is a rare "multipotentialite" in the tech world. Beyond his strategic prowess, he is a seasoned professional web developer who understands the technical backbone of the internet, ensuring every campaign is backed by high-performance, secure digital assets. His hands-on experience in video editing and full-scale digital management allows him to oversee every department with technical precision. Under his leadership, Feed Manthan has evolved into a powerhouse that handles everything from complex web deployments to viral campaign execution.</p>
+            </div>
+            
+            <div class="mt-6 p-6">
+                <h3 class="text-xl font-bold text-slate-800">Akhilesh Gupta – Lead Video Editor & Content Planning Expert</h3>
+                <p class="mt-2">In an era where attention is the new currency, Akhilesh Gupta is the master of capturing it. Serving as our Content Planning Expert, Akhilesh brings a cinematic edge to political and corporate communication. He doesn't just cut clips; he builds narratives. His deep understanding of audience psychology allows him to plan content that resonates emotionally while maintaining a professional, high-end aesthetic.</p>
+                <p class="mt-2">Akhilesh specializes in long-form storytelling and short-form viral hooks. His strategic planning ensures that every piece of content serves a specific purpose in the marketing funnel. Whether it’s a documentary-style political profile or a fast-paced campaign hype video, Akhilesh uses cutting-edge editing techniques to ensure the message is loud, clear, and unforgettable. He ensures that Feed Manthan’s output is never generic, but always strategically aligned with the core mission.</p>
+            </div>
+
+            <div class="mt-6 p-6 bg-slate-50 rounded-2xl">
+                <h3 class="text-xl font-bold text-slate-800">Sunny Deol – Lead Graphic Designer</h3>
+                <p class="mt-2">Visual identity is the first point of contact for any campaign, and Sunny Deol ensures that first impression is flawless. As our Lead Graphic Designer, Sunny brings a sophisticated and modern design language to Feed Manthan. He specializes in creating visual assets that command respect and convey authority. From branding identity and logos to complex election infographics, his work is characterized by clean lines and a deep understanding of political color theory.</p>
+                <p class="mt-2">Sunny believes that great design is about solving problems visually. He works closely with the strategy team to translate complex data and political promises into easily digestible, high-impact graphics. His ability to maintain brand consistency across diverse platforms—from physical hoardings in Patna to digital banners on Facebook and Instagram—makes him an invaluable asset.</p>
+            </div>
+
+            <div class="mt-6 p-6">
+                <h3 class="text-xl font-bold text-slate-800">Ritesh Kumar – Reel Editor & Cinematographer (Drone Expert)</h3>
+                <p class="mt-2">Ritesh Kumar is the man behind the lens who brings a "bird’s eye view" to our digital campaigns. As our specialist Cinematographer and Reel Editor, Ritesh excels in high-mobility content creation. He is an expert drone pilot, capturing breathtaking aerial perspectives of rallies and urban developments that add a grand, "larger-than-life" feel to our productions.</p>
+                <p class="mt-2">In the fast-moving world of social media, Ritesh focuses on the art of vertical storytelling. He understands the nuances of the "Reel" format, using rhythmic editing and high-quality camera work to keep viewers engaged. His dual role as a cameraman and editor allows him to capture footage with the final edit already in mind, ensuring a seamless and efficient production workflow.</p>
+            </div>
+
+            <div class="mt-6 p-6 bg-orange-50 rounded-2xl border-l-4 border-secondary">
+                <h3 class="text-xl font-black text-secondary">Sachin Kumar – Operations & Team Management</h3>
+                <p class="mt-2">The backbone of Feed Manthan is its internal coordination, managed by Sachin Kumar. As our Team Management and Presentations Lead, Sachin is responsible for the seamless execution of our internal workflows. He ensures that the creative vision of the CEO is translated into actionable tasks for the team, keeping every project on track and within deadline.</p>
+                <p class="mt-2">Sachin also specializes in preparing high-level presentations and analytics reports. He breaks down complex campaign metrics into clear, actionable insights for our clients. His organizational skills and ability to manage diverse personalities within our remote team ensure that Feed Manthan operates with the precision of a top-tier corporate firm.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 🦶 FULL FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 pt-16 border-t border-slate-900 border-t-4 border-t-primary w-full mt-auto">
+        <!-- Footer Top Menu -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-800 pb-10 mb-10 overflow-x-auto">
+            <div class="flex sm:flex-wrap items-center justify-center gap-6 md:gap-10 text-xs md:text-sm font-bold text-slate-300 min-w-max">
+                <a href="index.html#hero" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-home"></i> Home</a>
+                <a href="index.html#about" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-book-open"></i> Our Story</a>
+                <a href="index.html#team" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-user-tie"></i> Team</a>
+                <a href="index.html#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-tags"></i> Packages</a>
+                <a href="contact.html" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-headset"></i> Support</a>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <!-- Brand Column -->
+            <div class="col-span-1 sm:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="font-black text-3xl text-primary tracking-tight"><i class="fas fa-bullhorn text-secondary mr-2"></i>Feed<span class="text-secondary text-gradient">Manthan</span></span>
+                </div>
+                <p class="text-sm leading-relaxed mb-8 max-w-md text-slate-400 font-medium">
+                    India’s premier digital-first Marketing and Election Management agency. We engineer digital movements that shift public perception and drive tangible polling results. Victory is not a chance, it's a strategically executed algorithm.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all shadow-md"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all shadow-md"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all shadow-md"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-white font-black mb-6 uppercase tracking-widest text-sm relative inline-block">Policies<span class="absolute bottom-[-8px] left-0 w-1/2 h-0.5 bg-primary rounded-full"></span></h4>
+                <ul class="space-y-4 text-sm font-semibold text-slate-400">
+                    <li><a href="privacy.html" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Privacy Policy</a></li>
+                    <li><a href="disclaimer.html" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Disclaimer</a></li>
+                    <li><a href="index.html#feedback" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Client Reviews</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div>
+                <h4 class="text-white font-black mb-6 uppercase tracking-widest text-sm relative inline-block">Services<span class="absolute bottom-[-8px] left-0 w-1/2 h-0.5 bg-primary rounded-full"></span></h4>
+                <ul class="space-y-4 text-sm font-semibold text-slate-400">
+                    <li><a href="index.html#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Ward Member Setup</a></li>
+                    <li><a href="index.html#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Mukhiya Campaign</a></li>
+                    <li><a href="index.html#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Video Packages</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bg-black py-8 border-t border-slate-900 border-t-2 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs font-semibold text-slate-500">
+                <p class="mb-4 md:mb-0 text-center md:text-left">&copy; 2024-26 FeedManthan. All rights reserved.</p>
+                <p class="text-slate-500 bg-slate-900 px-5 py-2.5 rounded-full shadow-inner border border-slate-800 text-center md:text-right">Platform Engineered by <span class="text-secondary font-black tracking-widest ml-1 text-sm">Prem Raj Anand</span></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

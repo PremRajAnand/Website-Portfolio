@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedManthan | Digital Election Campaign Experts</title>
+    <!-- Placeholder Favicon -->
+    <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32.png?text=FM">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0B5ED7',
+                        secondary: '#FF6A00',
+                        dark: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #0B5ED7; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6A00; }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, #0B5ED7, #FF6A00);
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Testimonial Marquee */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+        .animate-scroll:hover {
+            animation-play-state: paused;
+        }
+        .testimonial-card { width: 350px; }
+
+        /* Blob Animations */
+        .shape-blob {
+            background: #0B5ED7;
+            height: 400px; width: 400px;
+            border-radius: 30% 50% 20% 40%;
+            animation: transform 20s ease-in-out infinite both alternate, movement_one 40s ease-in-out infinite both;
+            opacity: 0.1; position: absolute; left: 80%; top: 40%;
+            transform: translate(-50%, -50%); z-index: -1; filter: blur(60px);
+        }
+        .shape-blob.one {
+            background: #FF6A00;
+            height: 500px; width: 500px; left: 10%; top: 20%;
+            animation: transform 20s ease-in-out infinite both alternate, movement_two 40s ease-in-out infinite both;
+        }
+        @keyframes transform {
+            0%, 100% { border-radius: 33% 67% 70% 30% / 30% 30% 70% 70%; } 
+            20% { border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%; } 
+            40% { border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%; } 
+            60% { border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%; } 
+            80% { border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%; } 
+        }
+        @keyframes movement_one { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -50%) translate(80px, -80px); } }
+        @keyframes movement_two { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -50%) translate(-80px, 80px); } }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(90deg, #0B5ED7, #FF6A00);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* Form Custom Input */
+        .form-input {
+            width: 100%; padding: 0.75rem 1rem; border-radius: 0.75rem; border: 1px solid #e2e8f0;
+            background-color: #f8fafc; transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none; border-color: #0B5ED7; box-shadow: 0 0 0 4px rgba(11, 94, 215, 0.1); background-color: #ffffff;
+        }
+        
+        /* Floating animations */
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+        
+        /* Preloader */
+        #loader { transition: opacity 0.5s ease; z-index: 9999; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased relative">
+
+    <!-- Preloader -->
+    <div id="loader" class="fixed inset-0 bg-white flex items-center justify-center">
+        <div class="flex flex-col items-center">
+            <i class="fas fa-bullhorn text-5xl text-primary animate-bounce mb-4"></i>
+            <h2 class="font-bold text-2xl text-primary tracking-tight">Feed<span class="text-secondary">Manthan</span></h2>
+            <p class="text-slate-500 mt-2">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress" style="width: 0%;"></div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/917780020613?text=Hello%20FeedManthan,%20I%20am%20interested%20in%20an%20election%20campaign." target="_blank" class="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center group animate-bounce">
+        <i class="fab fa-whatsapp text-4xl"></i>
+        <span class="absolute scale-0 group-hover:scale-100 transition-all bg-white text-slate-800 font-bold text-xs px-3 py-1 rounded-full right-16 px-1 shadow-lg w-[120px] text-center border">Click to Chat!</span>
+    </a>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 transparent py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 glass rounded-2xl shadow-sm">
+            <div class="flex justify-between items-center h-16 px-4">
+                <!-- Logo -->
+                <a href="#hero" class="flex-shrink-0 flex items-center gap-2">
+                    <span class="font-black text-2xl text-primary tracking-tight"><i class="fas fa-bullhorn text-secondary mr-2"></i>Feed<span class="text-secondary">Manthan</span></span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 items-center text-sm font-semibold">
+                    <a href="#hero" class="text-slate-700 hover:text-primary transition-colors">Home</a>
+                    <a href="about.html" class="text-slate-700 hover:text-primary transition-colors">About Us</a>
+                    <a href="#team" class="text-slate-700 hover:text-primary transition-colors">Our Team</a>
+                    <a href="#pricing" class="text-slate-700 hover:text-primary transition-colors">Packages</a>
+                    <a href="#feedback" class="text-slate-700 hover:text-primary transition-colors">Reviews</a>
+                    <a href="#services" class="nav-link text-slate-700 hover:text-primary transition-colors">Strategy</a>
+                    <a href="contact.html" class="bg-gradient-to-r from-primary to-blue-700 text-white px-6 py-2.5 rounded-full hover:shadow-lg hover:shadow-primary/30 transition-all">Contact Us</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-800 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white/95 backdrop-blur-md border-t border-slate-100 shadow-xl absolute w-full left-0 origin-top animate-fade-in mt-4">
+            <div class="px-4 pt-2 pb-6 space-y-2 font-semibold">
+                <a href="#hero" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Home</a>
+                <a href="about.html" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">About Us</a>
+                <a href="#team" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Our Team</a>
+                <a href="#services" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Strategy</a>
+                <a href="#pricing" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Packages</a>
+                <a href="#feedback" class="block px-3 py-3 rounded-md text-slate-800 hover:bg-slate-50 hover:text-primary">Reviews</a>
+                <a href="contact.html" class="block mt-4 px-3 py-3 text-center rounded-full bg-primary text-white shadow-lg mx-3">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 🏠 HERO SECTION -->
+    <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-screen">
+        <!-- Animated Background Elements -->
+        <div class="shape-blob"></div>
+        <div class="shape-blob one"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="lg:w-full" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-primary text-sm font-bold mb-6 border border-blue-200 shadow-sm">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+                        </span>
+                        India's #1 Election Management Agency
+                    </div>
+                    <h1 class="text-6xl lg:text-7xl font-black text-slate-900 leading-[1.1] mb-6">
+                        Digital <span class="text-gradient">Election Campaign</span> Experts
+                    </h1>
+                    <p class="text-xl text-slate-600 mb-10 leading-relaxed font-medium">
+                        We don't just run ads. We engineer highly concentrated digital movements that capture voter sentiment and convert it into confirmed votes for you.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="contact.html" class="bg-gradient-to-r from-primary to-blue-700 text-white px-8 py-4 rounded-full font-bold text-center shadow-xl shadow-primary/30 transition-all hover:scale-105 hover:-translate-y-1">
+                            Contact Now
+                        </a>
+                        <a href="#pricing" class="bg-white text-slate-800 border-2 border-slate-200 hover:border-secondary hover:text-secondary px-8 py-4 rounded-full font-bold text-center transition-all">
+                            View Plans
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12 flex items-center gap-4">
+                        <div class="flex -space-x-4">
+                            <img class="w-12 h-12 rounded-full border-4 border-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="User placeholder">
+                            <img class="w-12 h-12 rounded-full border-4 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="User placeholder">
+                            <img class="w-12 h-12 rounded-full border-4 border-white object-cover" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" alt="User placeholder">
+                            <div class="w-12 h-12 rounded-full border-4 border-white bg-slate-100 flex items-center justify-center text-sm font-bold text-slate-800">+500</div>
+                        </div>
+                        <div class="text-sm">
+                            <p class="font-bold text-slate-800">Trusted by Leaders</p>
+                            <p class="text-slate-500">Across Bihar & India</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative lg:h-[600px] flex items-center justify-center animate-float" data-aos="zoom-in" data-aos-duration="1200">
+                    <div class="relative bg-white rounded-3xl shadow-2xl p-3 border border-slate-100 transform rotate-2 max-w-lg w-full">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Dashboard Template" class="rounded-2xl w-full object-cover shadow-inner">
+                        
+                        <!-- Floating Glass Card 1 -->
+                        <div class="hidden sm:block absolute -bottom-8 -left-8 glass p-5 rounded-2xl shadow-2xl w-56 border border-white/50">
+                            <div class="flex items-center gap-4 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-500 flex items-center justify-center"><i class="fas fa-arrow-up"></i></div>
+                                <div><p class="text-xs text-slate-500 font-bold">Voter Reach</p><p class="text-lg font-black text-slate-800">+248%</p></div>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-green-500 h-1.5 rounded-full w-3/4"></div></div>
+                        </div>
+                        
+                        <!-- Floating Glass Card 2 -->
+                        <div class="hidden sm:flex absolute -top-8 -right-8 glass p-4 rounded-2xl shadow-2xl border border-white/50 items-center gap-3">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-primary text-xl">
+                                    <i class="fas fa-thumbs-up"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-500 uppercase">Sentiment</p>
+                                    <p class="text-lg font-black text-slate-800">98% Pos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📊 ABOUT US (DETAILED STORY) -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+                <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Our Story</span>
+                <h2 class="font-bold text-4xl text-primary tracking-tight">Feed<span class="text-secondary">Manthan<span class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Journey</span></h2>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative order-2 lg:order-1" data-aos="fade-right">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?q=80&w=1147&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-3xl shadow-lg transform translate-y-8 object-cover h-64 w-full" alt="Team Discussion">
+                        <img src="https://images.unsplash.com/photo-1724862936518-ae7fcfc052c1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-3xl shadow-lg object-cover h-64 w-full" alt="Election Setup">
+                        <img src="https://images.unsplash.com/photo-1630201129622-a8e8ef3f7245?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-3xl shadow-lg transform translate-y-8 object-cover h-64 w-full col-span-2" alt="Tech Setup">
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-2xl shadow-2xl z-10 text-center border-4 border-slate-50 w-48">
+                        <h4 class="text-4xl font-black text-primary">5+</h4>
+                        <p class="text-sm font-bold text-slate-500">Years Experience</p>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 space-y-6" data-aos="fade-left">
+                    <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-primary">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">Welcome to Feed Manthan</h3>
+                        <p class="text-slate-600 leading-relaxed font-medium">
+                            India’s first digital-first marketing and election management agency, operating on a fully online model.
+                        </p>
+                    </div>
+
+                    <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-secondary">
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">The 'Manthan' Concept</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            The word "Manthan" refers to the deep churning of the ocean to extract the nectar of immortality. Similarly, we believe that success in the digital age requires deep churning of data, human psychology, and creative innovation to extract the nectar of success.
+                        </p>
+                    </div>
+
+                    <div class="glass p-8 rounded-3xl shadow-lg border border-slate-200 mt-8 relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 text-8xl text-primary opacity-10"><i class="fas fa-trophy"></i></div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Our Proven Track Record</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            We are not newcomers. Feed Manthan has been a silent force behind high-intensity political battles, notably during the Bihar Vidhan Sabha Elections. 
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-green-500 text-lg"></i> <span class="font-bold text-slate-700">Managing ground-level sentiment</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-green-500 text-lg"></i> <span class="font-bold text-slate-700">Viral content distribution</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-green-500 text-lg"></i> <span class="font-bold text-slate-700">Real-time candidate branding</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 👥 TEAM SECTION -->
+    <section id="team" class="py-24 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+                <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Our Core Pillars</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Meet The Gen Z<span class="text-primary">Experts</span></h2>
+                <div class="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Prem Raj Anand -->
+                <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 group hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://www.techmasaala.com/wp-content/uploads/2026/04/Prem-Raj-Anand.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Prem Raj Anand placeholder">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-8 -mt-20 relative z-10">
+                        <p class="text-secondary font-black text-xs uppercase tracking-wider mb-2">Founder & CEO / Web Developer</p>
+                        <h3 class="text-3xl font-black text-white mb-4 group-hover:text-primary transition-colors">Prem Raj Anand</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Architects entire marketing ecosystems balancing digital optics with ground realities. As a professional web developer, he ensures campaigns are backed by high-performance digital assets.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://in.linkedin.com/in/premrajanand" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-primary transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-primary transition-colors"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Akhilesh Gupta -->
+                <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 group hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://www.techmasaala.com/wp-content/uploads/2026/04/Akhilesh-1.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Akhilesh Gupta placeholder">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-8 -mt-20 relative z-10">
+                        <p class="text-secondary font-black text-xs uppercase tracking-wider mb-2">Lead Video Editor & Content</p>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-primary transition-colors">Akhilesh Gupta</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Brings a cinematic edge to communication. Builds narratives using long-form storytelling and fast-paced viral hooks. Captures audience attention with emotional resonance.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sunny Deol -->
+                <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 group hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://www.techmasaala.com/wp-content/uploads/2026/04/Sunny.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Sunny Deol placeholder">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-8 -mt-20 relative z-10">
+                        <p class="text-secondary font-black text-xs uppercase tracking-wider mb-2">Lead Graphic Designer</p>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-primary transition-colors">Sunny Deol</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Translates complex political promises into high-impact visuals. From physical hoardings to Facebook banners, he maintains a modern and sophisticated design language.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ritesh Kumar -->
+                <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 group hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://www.techmasaala.com/wp-content/uploads/2026/04/Drone-1.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Ritesh Kumar placeholder">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-8 -mt-20 relative z-10">
+                        <p class="text-secondary font-black text-xs uppercase tracking-wider mb-2">Reel Editor & Drone Expert</p>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-primary transition-colors">Ritesh Kumar</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            The man behind the lens. Ritesh captures breathtaking aerial perspectives and excels in high-mobility vertical reel storytelling that dominates Instagram and Facebook.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sachin Kumar -->
+                <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 group hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://www.techmasaala.com/wp-content/uploads/2026/04/sachin-1.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Sachin Kumar placeholder">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-8 -mt-20 relative z-10">
+                        <p class="text-secondary font-black text-xs uppercase tracking-wider mb-2">Operations & Management</p>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-primary transition-colors">Sachin Kumar</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            The coordination backbone. Sachin translates creative vision into actionable tasks, managing team workflows, tracking projects, and generating data-driven reports.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Amrita Kumari -->
+                <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 group hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://www.techmasaala.com/wp-content/uploads/2026/04/Amrita-1.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Amrita Kumari placeholder">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-8 -mt-20 relative z-10">
+                        <p class="text-secondary font-black text-xs uppercase tracking-wider mb-2">Poster Design And Ads Setup</p>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-primary transition-colors">Amrita Kumari</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Amrita specializes in high-conversion political graphics and precise targeted ad campaigns. She ensures that every piece of content reaches exactly the right voter demographic.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 🎯 SERVICES / CAMPAIGN STRATEGY -->
+    <section id="services" class="py-24 bg-slate-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20" data-aos="zoom-in">
+                <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Our Arsenal</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">Smart Campaign <span class="text-primary">Strategy</span></h2>
+                <div class="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 hover:border-primary transition-all group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-primary text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Digital Branding</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">Personal branding focusing on projecting you as the ultimate leader. We make sure every pixel conveys authority and trust.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 hover:border-green-500 transition-all group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 text-2xl mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">WhatsApp Marketing</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">Hyper-local targeting via WhatsApp broadcast networks. Reaching every voter's smartphone directly and personalizing the message.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 hover:border-pink-500 transition-all group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600 text-2xl mb-6 group-hover:bg-pink-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Viral Reels Strategy</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">Algorithmic dominance through trending music, heavy pacing, and sharp captions. We make your speeches highly contagious.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 hover:border-purple-500 transition-all group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 text-2xl mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Community Targeting</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">Caste/Community tailored content matrix. Addressing local issues effectively and appealing to segmented voter bases intelligently.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 hover:border-secondary transition-all group lg:col-span-2" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-secondary text-2xl mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
+                        <i class="fas fa-masks-theater"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Meme & Troll Campaign</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium max-w-2xl">A shadow war on social media to highlight opponent flaws using humor. We utilize proxy pages to distribute high-impact memes that shape public opinion subliminally without affecting your official leader image.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section (Agency Info) -->
+    <section id="agency" class="py-24 relative bg-slate-50 overflow-hidden border-t border-slate-200">
+        <!-- Floating Animated Backgrounds -->
+        <div class="absolute top-20 left-0 w-72 h-72 bg-blue-100/50 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+        <div class="absolute top-40 right-20 w-72 h-72 bg-orange-100/50 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-8 left-40 w-72 h-72 bg-purple-100/50 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Our Superpowers</span>
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6">Why Choose <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500">FeedManthan?</span></h2>
+                <p class="text-slate-600 text-lg font-medium">We don't just run ads. We architect movements using data, psychology, and viral content strategies.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Highlight Card 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-blue-100 hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl shadow-sm flex items-center justify-center text-2xl text-primary mb-6">
+                        <i class="fas fa-search-location group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-3">Booth-Level Mapping</h4>
+                    <p class="text-sm text-slate-600">We map voter demographics down to the booth level, targeting micro-communities with tailored messages.</p>
+                </div>
+
+                <!-- Highlight Card 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-orange-100 hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl shadow-sm flex items-center justify-center text-2xl text-secondary mb-6">
+                        <i class="fas fa-bolt group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-3">Viral Content Engine</h4>
+                    <p class="text-sm text-slate-600">Our in-house reel editors and creators produce fast-paced, highly engaging political content daily.</p>
+                </div>
+
+                <!-- Highlight Card 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-green-100 hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-green-50 rounded-2xl shadow-sm flex items-center justify-center text-2xl text-green-500 mb-6">
+                        <i class="fab fa-whatsapp group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-3">WhatsApp War Room</h4>
+                    <p class="text-sm text-slate-600">We establish massive dark-social broadcast networks to bypass algorithms directly to inboxes.</p>
+                </div>
+
+                <!-- Highlight Card 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-purple-100 hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-purple-50 rounded-2xl shadow-sm flex items-center justify-center text-2xl text-purple-500 mb-6">
+                        <i class="fas fa-shield-alt group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-3">Anti-Troll Defense</h4>
+                    <p class="text-sm text-slate-600">Proactive narrative control. We instantly counter opponent propaganda to protect your public image 24/7.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center" data-aos="fade-up">
+                <div class="relative inline-block w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden group bg-slate-900 border border-slate-800">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200" alt="Data Analytics" class="w-full object-cover h-[350px] opacity-70 group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent flex flex-col justify-end p-8 md:p-12 text-left">
+                        <div class="bg-secondary/20 text-secondary border border-secondary/30 px-4 py-1 rounded-full text-xs font-bold inline-block w-max mb-4 uppercase tracking-widest backdrop-blur-md">Secret Weapon</div>
+                        <h4 class="text-3xl md:text-4xl font-bold text-white mb-3">Driven by High-Level Analytics</h4>
+                        <p class="text-gray-300 max-w-2xl text-base leading-relaxed">We analyze past voting trends and sentiment curves to maximize every rupee spent on ads, turning impressions directly into valid votes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 💰 PRICING SECTION -->
+    <section id="pricing" class="py-24 bg-slate-900 text-white relative">
+        <div class="absolute inset-0 bg-[url('https://source.unsplash.com/random/1920x1080/?network,dark')] opacity-5 bg-cover bg-fixed"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto mb-20" data-aos="fade-up">
+                <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Investment For Victory</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Election <span class="text-primary">Packages</span></h2>
+                <p class="text-xl text-slate-400">Select the tier that matches your political ambition and fight complexity.</p>
+            </div>
+
+            <!-- TIER 1: MUKHIYA / WARD -->
+            <div class="mb-24">
+                <h3 class="text-3xl font-black text-center text-primary mb-12 border-b border-slate-800 pb-4">💎 Long Term Plan</h3>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Basic -->
+                    <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 relative group hover:border-green-500 transition-all" data-aos="fade-up" data-aos-delay="100">
+                        <div class="absolute -top-4 -right-4 bg-green-500 text-white font-black text-sm px-4 py-2 rounded-xl shadow-lg transform rotate-6 animate-pulse">-20% OFF</div>
+                        <h4 class="text-2xl font-black text-white mb-2">BASIC</h4>
+                        <div class="mb-8">
+                            <p class="text-slate-500 line-through text-lg mb-1">₹18,000 - ₹30,000</p>
+                            <p class="text-3xl font-black text-white">₹15k – ₹25k<span class="text-sm text-slate-400 font-medium"> /month</span></p>
+                        </div>
+                        <ul class="space-y-4 mb-10 text-slate-300 font-medium text-sm">
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> 5–10 Poster (Festival + Political)</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> 2–5 Reels (simple editing)</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Facebook Page setup & handle</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Full Page Audit</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Trending Hashtag</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Organic Reach</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> WhatsApp DP & Status Content</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Basic Caption</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> 1 Campaign Banner Design</li>
+                        </ul>
+                        <a href="contact.html" class="block text-center bg-slate-700 hover:bg-green-500 text-white font-black py-4 rounded-2xl transition-all w-full">Select Plan</a>
+                    </div>
+
+                    <!-- Medium -->
+                    <div class="bg-gradient-to-b from-primary to-blue-900 rounded-[2rem] p-1 shadow-[0_0_40px_rgba(11,94,215,0.3)] relative group transform lg:-translate-y-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-slate-900 rounded-[1.9rem] p-8 h-full relative overflow-hidden">
+                                                <div class="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-20">-25% OFF</div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-b-lg uppercase tracking-wider z-20">Most Popular</div>
+                            
+                            <h4 class="text-2xl font-black text-white mb-2 mt-4">MEDIUM</h4>
+                            <div class="mb-8">
+                                <p class="text-slate-500 line-through text-lg mb-1">₹33,000 - ₹66,000</p>
+                                <p class="text-4xl font-black text-white">₹25k – ₹50k<span class="text-sm text-slate-400 font-medium"> /month</span></p>
+                            </div>
+                            <ul class="space-y-4 mb-10 text-slate-300 font-medium text-sm relative z-10">
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> 25–30 Posters (Election Time 25+)</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> 10–20 Reels (voice+trending style)</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> WhatsApp Reach</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> Facebook manage</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> Instagram manage</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> Weekly WhatsApp content map</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> 1–2 Video Speech Editing</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> Comment reply / engagement</li>
+                                <li class="flex gap-3"><i class="fas fa-check-circle text-secondary text-lg shrink-0"></i> Basic Ad setup (cost separate)</li>
+                            </ul>
+                            <a href="contact.html" class="block text-center bg-gradient-to-r from-primary to-blue-600 text-white font-black py-4 rounded-2xl transition-all w-full shadow-lg hover:shadow-primary/50 relative z-10">Select Plan</a>
+                        </div>
+                    </div>
+
+                    <!-- High -->
+                    <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 relative group hover:border-red-500 transition-all" data-aos="fade-up" data-aos-delay="300">
+                        <div class="absolute -top-4 -right-4 bg-red-500 text-white font-black text-sm px-4 py-2 rounded-xl shadow-lg transform rotate-6">-10% OFF</div>
+                        <h4 class="text-2xl font-black text-white mb-2">HIGH</h4>
+                            <div class="mb-8">
+                            <p class="text-slate-500 line-through text-lg mb-1">₹55,000 - ₹1,00,000</p>
+                            <p class="text-3xl font-black text-white">₹50k – ₹90k<span class="text-sm text-slate-400 font-medium"> /month</span></p>
+                        </div>
+                        <ul class="space-y-4 mb-10 text-slate-300 font-medium text-sm">
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> 40–50 Posters (Election 50+)</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> 25–40 Reels (viral style script)</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> FB + Insta + YouTube Shorts</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> WhatsApp Broadcast System</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Daily Content Calendar</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Booth-wise targeted content</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> 3–5 Video Shoot + Editing</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Meme / Viral Campaign</li>
+                            <li class="flex gap-3"><i class="fas fa-check-circle text-primary text-lg shrink-0"></i> Ad Campaign Management</li>
+                        </ul>
+                        <a href="contact.html" class="block text-center bg-slate-700 hover:bg-red-500 text-white font-black py-4 rounded-2xl transition-all w-full mt-auto">Select Plan</a>
+                    </div>
+                </div>
+            </div>
+
+
+                        <!-- Second Row of Packages -->
+            <h3 class="text-2xl font-bold text-center text-blue-400 mb-8 border-b border-gray-700 pb-4 mt-16">🎯 Mid Term Plan</h3>
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                
+                <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 hover:border-primary transition-all relative overflow-hidden group" data-aos="fade-up">
+                     <div class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">-8% OFF</div>
+                     <h4 class="text-xl font-bold text-white mb-2">BASIC</h4>
+                     <div class="mb-6">
+                        <span class="text-gray-500 line-through text-lg">₹43,500 - ₹76,000</span>
+                        <div class="text-3xl font-extrabold text-white mt-1">₹40k – ₹70k <span class="text-sm font-normal text-gray-400">/mo</span></div>
+                     </div>
+                     <ul class="space-y-3 mb-8 text-gray-300 text-sm">
+                         <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Profile Manage</li>
+                         <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Pages Manage</li>
+                         <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Political DP</li>
+                         <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> 30–40 Poster Design</li>
+                         <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> 15 Election Reels</li>
+                         <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> WhatsApp Broadcast Content</li>
+                     </ul>
+                    <a href="contact.html" class="block text-center bg-slate-700 hover:bg-green-500 text-white font-black py-4 rounded-2xl transition-all w-full">Select Plan</a>
+                </div>
+
+                <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-8 border-2 border-primary transform scale-105 shadow-2xl shadow-primary/20 relative overflow-hidden group z-10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-20">-12% OFF</div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-b-lg uppercase tracking-wider z-20">Panchayat Fav</div>
+                    <h4 class="text-xl font-bold text-white mb-2 mt-2">MEDIUM</h4>
+                    <div class="mb-6">
+                        <span class="text-gray-500 line-through text-lg">₹80,000 - ₹1.35 Lakh</span>
+                        <div class="text-3xl font-extrabold text-white mt-1">₹70k – ₹1.2 Lakh <span class="text-sm font-normal text-gray-400">/mo</span></div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> 50–70 Poster + Banners</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> Election Banners</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> 25–40 Reels setup</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> Video + candidate speech editing</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> WhatsApp Group Mangement </li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> Basic location targeting ads</li>
+                    </ul>
+                    <a href="contact.html" class="block text-center bg-gradient-to-r from-primary to-blue-600 text-white font-black py-4 rounded-2xl transition-all w-full shadow-lg hover:shadow-primary/50 relative z-10">Select Plan</a>
+               </div>
+
+               <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 hover:border-secondary transition-all relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">-15% OFF</div>
+                    <h4 class="text-xl font-bold text-white mb-2">HIGH</h4>
+                    <div class="mb-6">
+                        <span class="text-gray-500 line-through text-lg">₹1.4 Lakh - ₹2.3 Lakh</span>
+                        <div class="text-3xl font-extrabold text-white mt-1">₹1.2L – ₹2L+ <span class="text-sm font-normal text-gray-400">/mo</span></div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Full Panchayat Branding Identity</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> 70–100 Poster</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> 40–60 Reels</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Ground + Digital sync integration</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Team Handling</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Influencer/Local Companies Cover</li>
+                    </ul>
+                    <a href="contact.html" class="block text-center bg-slate-700 hover:bg-red-500 text-white font-black py-4 rounded-2xl transition-all w-full mt-auto">Select Plan</a>
+               </div>
+            </div>
+
+                        <!-- Third Row of Packages -->
+            <h3 class="text-2xl font-bold text-center text-blue-400 mb-8 border-b border-gray-700 pb-4 mt-16">🚀 Short Term Plan (Election Time)</h3>
+            <div class="grid md:grid-cols-3 gap-8 mb-10">
+                
+                <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 hover:border-primary transition-all relative overflow-hidden group" data-aos="fade-up">
+                    <div class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">-15% OFF</div>
+                    <h4 class="text-xl font-bold text-white mb-2">BASIC <span class="text-sm font-normal text-gray-400">(Awareness)</span></h4>
+                    <div class="mb-6">
+                        <span class="text-gray-500 line-through text-lg">₹94,000 - ₹1.75 Lakh</span>
+                        <div class="text-3xl font-extrabold text-white mt-1">₹80k – ₹1.5L <span class="text-sm font-normal text-gray-400">/mo</span></div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> 50–70 Campaign Poster</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> 25–40 Political reels</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Multi-page handling & cross-posting</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Base Audience targeting</li>
+                    </ul>
+                    <a href="contact.html" class="block w-full py-3 text-center rounded-xl bg-gray-700 hover:bg-primary text-white font-semibold transition-all mt-auto">Select Plan</a>
+               </div>
+
+               <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 hover:border-yellow-500 transition-all relative overflow-hidden group transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
+                   <div class="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-20">-18% OFF</div>
+                   <h4 class="text-xl font-bold text-white mb-2">MEDIUM <span class="text-sm font-normal text-gray-400">(Reach)</span></h4>
+                   <div class="mb-6">
+                       <span class="text-gray-500 line-through text-lg">₹1.8 Lakh - ₹3.6 Lakh</span>
+                       <div class="text-3xl font-extrabold text-white mt-1">₹1.5L – ₹3L <span class="text-sm font-normal text-gray-400">/mo</span></div>
+                   </div>
+                   <ul class="space-y-3 mb-8 text-gray-300 text-sm">
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-yellow-500 mt-1"></i> 80–120 Poster</li>
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-yellow-500 mt-1"></i> 50+ Trending reels</li>
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-yellow-500 mt-1"></i> Full Video Campaign Management</li>
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-yellow-500 mt-1"></i> Build WhatsApp Group Network</li>
+                   </ul>
+                   <a href="contact.html" class="block w-full py-3 text-center rounded-xl bg-gray-700 hover:bg-yellow-600 text-white font-semibold transition-all mt-auto">Select Plan</a>
+               </div>
+
+              <div class="bg-red-900/40 rounded-3xl p-8 border-2 border-red-500 relative overflow-hidden group transform hover:-translate-y-2 shadow-2xl shadow-red-500/20" data-aos="fade-up" data-aos-delay="200">
+                   <div class="absolute -top-6 -right-6 text-6xl opacity-30 group-hover:scale-110 transition-transform duration-500">🚀</div>
+                   <div class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-20">20% OFF</div>
+                   <h4 class="text-xl font-bold text-white mb-2">HIGH <span class="text-sm font-normal text-red-300">(War Mode)</span></h4>
+                   <div class="mb-6">
+                       <span class="text-gray-500 line-through text-lg">₹3.75 Lakh - ₹7.5 Lakh</span>
+                       <div class="text-3xl font-extrabold text-white mt-1">₹3L – ₹6L+ <span class="text-sm font-normal text-gray-400">/mo</span></div>
+                   </div>
+                   <ul class="space-y-3 mb-8 text-gray-300 text-sm relative z-10">
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-red-500 mt-1"></i> Full Team (Designer+Editor+Manager)</li>
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-red-500 mt-1"></i> Daily reels + Live coverage streams</li>
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-red-500 mt-1"></i> Booth-Level hyper-targeting</li>
+                       <li class="flex items-start gap-3"><i class="fas fa-check-circle text-red-500 mt-1"></i> Trageted Ad + Data mapping strategy</li>
+                   </ul>
+                   <a href="contact.html" class="block w-full py-3 text-center rounded-xl bg-gradient-to-r from-red-600 to-red-800 text-white font-bold shadow-lg transition-all hover:scale-[1.02] mt-auto">Activate War Mode</a>
+              </div>
+            </div>
+
+            <!-- EXTRA SERVICES -->
+            <div class="mt-12 border-t border-gray-800 pt-20">
+                <div class="text-center mb-12">
+                     <h3 class="text-3xl md:text-4xl font-bold mb-4">📦 Extra Services <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">(Add-ons)</span></h3>
+                     <p class="text-gray-400">Add-ons tailored to give your campaign the ultimate edge.</p>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- FB Ads -->
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-700 hover:border-blue-500 transition-all group" data-aos="fade-up">
+                        <div class="h-32 bg-blue-600/20 relative flex items-center justify-center overflow-hidden">
+                            <i class="fab fa-facebook text-5xl text-blue-500 group-hover:scale-125 transition-transform duration-500 z-10"></i>
+                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80')] opacity-20 bg-cover bg-center"></div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h4 class="font-bold text-white mb-2">FB/Insta Ads</h4>
+                            <p class="text-2xl font-bold text-blue-400">₹5k – ₹1L+</p>
+                            <p class="text-xs text-gray-500 mt-2">Targeted audience projection</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Shoot -->
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-500 transition-all group" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-32 bg-red-600/20 relative flex items-center justify-center overflow-hidden">
+                            <i class="fas fa-video text-5xl text-red-500 group-hover:scale-125 transition-transform duration-500 z-10"></i>
+                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=400&q=80')] opacity-20 bg-cover bg-center"></div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h4 class="font-bold text-white mb-2">Video Shoot (1 Day)</h4>
+                            <p class="text-2xl font-bold text-red-400">₹3k – ₹15k</p>
+                            <p class="text-xs text-gray-500 mt-2">Cinematic Candidate Profile</p>
+                        </div>
+                    </div>
+
+                    <!-- Drone Shoot -->
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-700 hover:border-green-500 transition-all group" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-32 bg-green-600/20 relative flex items-center justify-center overflow-hidden">
+                            <i class="fas fa-helicopter text-5xl text-green-500 group-hover:-translate-y-4 group-hover:scale-110 transition-transform duration-500 z-10"></i>
+                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&w=400&q=80')] opacity-50 bg-cover bg-center"></div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h4 class="font-bold text-white mb-2">Drone Shoot</h4>
+                            <p class="text-2xl font-bold text-green-400">₹5k – ₹20k</p>
+                            <p class="text-xs text-gray-500 mt-2">Aerial coverage of massive rallies</p>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Promo -->
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-700 hover:border-purple-500 transition-all group" data-aos="fade-up" data-aos-delay="300">
+                        <div class="h-32 bg-purple-600/20 relative flex items-center justify-center overflow-hidden">
+                            <i class="fas fa-bullhorn text-5xl text-purple-500 group-hover:scale-125 transition-transform duration-500 z-10"></i>
+                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=400&q=80')] opacity-20 bg-cover bg-center"></div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h4 class="font-bold text-white mb-2">Influencer Promo</h4>
+                            <p class="text-2xl font-bold text-purple-400">₹2k – ₹50k</p>
+                            <p class="text-xs text-gray-500 mt-2">Per post viral amplification</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ONE TIME SETUP CARD PRICING-->
+            <div class="mt-32 border-t border-gray-800 pt-20" data-aos="fade-up">
+                <h3 class="text-3xl font-black text-center mb-12 text-white">📌 One Shot Plan (Election Peak Time)</h3>              
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Setup Basic -->
+                    <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 relative group hover:border-blue-500 transition-all shadow-xl">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl group-hover:scale-110 transition-transform"><i class="fas fa-users"></i></div>
+                            <div>
+                                <h4 class="text-xl font-black text-white">Ward /Panchayat Samiti</h4>
+                                <p class="text-xs text-blue-300 uppercase tracking-wider font-bold">Panchayat Base</p>
+                            </div>
+                        </div>
+                        <div class="mb-8 mt-6">
+                            <p class="text-4xl font-black text-white">₹30k<span class="text-lg text-slate-400 font-medium"> – ₹50k</span></p>
+                            <p class="text-slate-500 text-sm mt-1">One-time transparent investment</p>
+                        </div>
+                        <h5 class="text-sm font-bold text-white mb-4 border-b border-slate-700 pb-2 uppercase tracking-wide">Included Infrastructure:</h5>
+                        <ul class="space-y-4 mb-10 text-slate-300 font-medium text-sm">
+                            <li class="flex gap-3"><i class="fas fa-check text-blue-500 mt-0.5"></i> </li>
+                            <li class="flex gap-3"><i class="fas fa-check text-blue-500 mt-0.5"></i> Profiling Audit (Bio, Layout, DP)</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-blue-500 mt-0.5"></i> Basic Branding (Logo Style + Theme)</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-blue-500 mt-0.5"></i> Facebook Page Full Optimization</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-blue-500 mt-0.5"></i> WhatsApp Content Deliver</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-blue-500 mt-0.5"></i> Basic Engagement Guidance</li>
+                        </ul>
+                        <a href="contact.html" class="block text-center bg-slate-700 hover:bg-blue-600 text-white font-black py-4 rounded-2xl transition-all w-full mt-auto">Buy Setup Details</a>
+                    </div>
+                    
+                    <!-- Setup Mukhiya (Popular) -->
+                    <div class="bg-slate-900 rounded-[2rem] p-8 border-2 border-primary relative group shadow-[0_0_30px_rgba(11,94,215,0.2)] transform hover:-translate-y-2 transition-transform">
+                        <div class="absolute top-0 right-8 bg-primary text-white font-black text-xs px-4 py-1.5 rounded-b-xl z-20 uppercase tracking-widest shadow-lg">Most Essential</div>
+                        <div class="flex items-center gap-4 mb-4 mt-2">
+                            <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary text-xl group-hover:scale-110 transition-transform"><i class="fas fa-chess-king"></i></div>
+                            <div>
+                                <h4 class="text-xl font-black text-white">Mukhiya Level Setup</h4>
+                                <p class="text-xs text-primary uppercase tracking-wider font-bold">Block Base</p>
+                            </div>
+                        </div>
+                        <div class="mb-8 mt-6">
+                            <p class="text-4xl font-black text-white">₹1.5 Lakh</p>
+                            <p class="text-slate-500 text-sm mt-1">One-time complete ecosystem</p>
+                        </div>
+                        <h5 class="text-sm font-bold text-white mb-4 border-b border-primary/30 pb-2 uppercase tracking-wide">Included Infrastructure:</h5>
+                        <ul class="space-y-4 mb-10 text-slate-300 font-medium text-sm">
+                            <li class="flex gap-3"><i class="fas fa-check text-primary mt-0.5"></i> Monthly 1–2 Posters (Festival+Political)</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-primary mt-0.5"></i> Multi-platform (FB, Insta, Twitter) Links</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-primary mt-0.5"></i> SEO Optimized Public Biography</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-primary mt-0.5"></i> Viral Content + Trending Hashtags (# Strategy)</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-primary mt-0.5"></i> Issue-based & Booth-wise Target Content</li>
+                        </ul>
+                        <a href="contact.html" class="block text-center bg-primary hover:bg-blue-600 text-white font-black py-4 rounded-2xl transition-all w-full mt-auto shadow-lg shadow-primary/30">Buy Full Blueprint</a>
+                    </div>
+
+                    <!-- Setup Zila -->
+                    <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 relative group hover:border-purple-500 transition-all shadow-xl">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-xl group-hover:scale-110 transition-transform"><i class="fas fa-globe"></i></div>
+                            <div>
+                                <h4 class="text-xl font-black text-white">Zila Parishad Setup</h4>
+                                <p class="text-xs text-purple-400 uppercase tracking-wider font-bold">Territorial Constituency Base</p>
+                            </div>
+                        </div>
+                        <div class="mb-8 mt-6">
+                            <p class="text-4xl font-black text-white">₹2.2 Lakh</p>
+                            <p class="text-slate-500 text-sm mt-1">Wide-regional master framework</p>
+                        </div>
+                        <h5 class="text-sm font-bold text-white mb-4 border-b border-slate-700 pb-2 uppercase tracking-wide">Included Infrastructure:</h5>
+                        <ul class="space-y-4 mb-10 text-slate-300 font-medium text-sm">
+                            <li class="flex gap-3"><i class="fas fa-check text-purple-500 mt-0.5"></i> Complete District-Level Page Architecting</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-purple-500 mt-0.5"></i> Weekly 3–4 ya Daily Posting (As Per Situation)</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-purple-500 mt-0.5"></i> Comment Reply / Engagement Support</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-purple-500 mt-0.5"></i> Automated Troll Defense Workflows</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-purple-500 mt-0.5"></i> Campaign Strategy Planning</li>
+                        </ul>
+                    
+                    </div>
+                </div>
+                <div class="text-center pt-20 mb-12">
+                     <p class="text-gray-400">📌 Ads & Promotion:- Our Ads & Promotion strategy focuses on maximizing your reach through expert paid campaign management and Precision Targeting based on location, caste, and voter demographics to ensure your message hits the right audience. Please note that the actual ad spend is not included in the package, allowing you the flexibility to adjust the budget according to your specific campaign needs and scale.</p>
+                </div>
+            </div>
+
+    <!-- ⭐ CUSTOMER FEEDBACK -->
+    <section id="feedback" class="py-24 bg-white overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Success Stories</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">What Leaders <span class="text-primary">Say</span></h2>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="relative w-full h-[320px] overflow-hidden" id="testimonial-container">
+                <div class="flex gap-6 animate-scroll absolute whitespace-nowrap px-4 items-stretch" id="testimonial-track">
+                    <!-- Testimonials will be injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📄 DISCLAIMER PAGE SECTION -->
+    <section id="disclaimer" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-6 text-slate-600 text-sm leading-relaxed" data-aos="fade-up">
+            <h2 class="text-3xl font-black text-slate-900 mb-6 border-b pb-4">Disclaimer</h2>
+            <p class="mb-4">The information provided by Feed Manthan ("we," "us," or "our") on this website is for general informational and marketing purposes only. While we strive to provide accurate information, we make no representation regarding the absolute completeness of any strategy.</p>
+            <p class="mb-4"><strong>Professional Results:</strong> Past performance in previous elections (like Bihar Vidhan Sabha) is not a guarantee of future success. Election outcomes depend on numerous external parameters like public sentiment and voting day conditions.</p>
+            <p><strong>Pricing:</strong> Prices mentioned in packages are estimations and base rates. Actual costs may fluctuate depending on the geographical scope, candidate profile baseline, and immediate urgency.</p>
+        </div>
+    </section>
+
+    <!-- 🔒 PRIVACY POLICY SECTION -->
+    <section id="privacy" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-6 text-slate-600 text-sm leading-relaxed" data-aos="fade-up">
+            <h2 class="text-3xl font-black text-slate-900 mb-6 border-b pb-4">Privacy Policy</h2>
+            <p class="mb-4">At Feed Manthan, protecting your confidentiality, especially concerning political data, is our top priority. We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information or campaign strategy details.</p>
+            <p class="mb-4"><strong>Data Collection:</strong> We collect information when you fill out our contact forms, including name, email, phone number, and constituency data. This is strictly used to craft your custom election marketing strategy.</p>
+            <p><strong>Security:</strong> We implement specialized security measures to safeguard communication between us and our political clients, ensuring opposition parties cannot access strategic blueprints.</p>
+        </div>
+    </section>
+
+    <!-- 📞 CONTACT US PAGE -->
+    <section id="contact" class="py-24 bg-gradient-to-br from-primary to-slate-900 relative">
+        <div class="absolute inset-0 bg-[url('https://source.unsplash.com/random/1920x1080/?abstract,blue')] opacity-10 bg-cover bg-fixed mix-blend-overlay"></div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row" data-aos="zoom-in">
+                <!-- Info Panel -->
+                <div class="w-full md:w-2/5 bg-slate-900 p-10 text-white flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/30 rounded-full blur-[80px]"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl font-black mb-3">Get In Touch</h2>
+                        <p class="text-slate-400 text-sm mb-10 font-medium">Drop your details. Our election strategists will audit your current profile and contact you within 24 hours.</p>
+                        
+                        <div class="space-y-8 font-medium">
+                            <div class="flex items-center gap-5">
+                                <div class="w-12 h-12 rounded-full glass-dark flex items-center justify-center shrink-0 text-secondary border border-slate-700 text-lg"><i class="fas fa-phone"></i></div>
+                                <span>+91 7780020613</span>
+                            </div>
+                            <div class="flex items-center gap-5">
+                                <div class="w-12 h-12 rounded-full glass-dark flex items-center justify-center shrink-0 text-secondary border border-slate-700 text-lg"><i class="fas fa-envelope"></i></div>
+                                <span>contactalertnetwork@gmail.com</span>
+                            </div>
+                            <div class="flex flex-start gap-5">
+                                <div class="w-12 h-12 rounded-full glass-dark flex items-center justify-center shrink-0 mt-1 text-secondary border border-slate-700 text-lg"><i class="fas fa-map-marker-alt"></i></div>
+                                <span class="leading-relaxed">R-Block, Patna, <br>Bihar, 800001</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Panel -->
+                <div class="w-full md:w-3/5 p-10 md:p-14 bg-white relative">
+                    <h3 class="text-3xl font-black text-slate-800 mb-8">Start Your Campaign</h3>
+                    
+                    <div id="main-form">
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccess();}"></iframe>
+                        
+                        <!-- Requested Google Form Action Link -->
+                        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTx6sX2LTBe4j_3Thb65fndrZgVJrRKTeiV2gbTaeFYxRJ7Q/formResponse" 
+                              method="post" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-6">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-normal text-black">
+                                <div><label class="block text-sm text-slate-600 mb-2">Full Name</label><input type="text" name="entry.1806510947" class="form-input" placeholder="Enter Your Name" required></div>
+                                <div><label class="block text-sm text-slate-600 mb-2">Phone Number</label><input type="tel" name="entry.1368020829" class="form-input" placeholder="10 Digit Number" required pattern="[0-9]{10}" maxlength="10" title="Please enter exactly 10 digits"></div>
+                                <div><label class="block text-sm text-black mb-2">Designation</label>
+                                <select name="entry.90984626" class="form-input text-black" required>
+                                <option value="" disabled selected>Select level</option>
+                                <option value="Mukhiya">Mukhiya</option>
+                                <option value="Zila Parishad">Zila Parishad</option>
+                                <option value="Panchyat Samiti">Panchyat Samiti</option>
+                                <option value="Ward Member">Ward Member</option>
+                                <option value="Other">Other</option>
+                                </select>
+                                </div>
+                                <div><label class="block text-sm text-black mb-2">Panchayat / Zila</label><input type="text" name="entry.1945955649" class="form-input" placeholder="Location Name" required></div>
+                            </div>
+                            
+<div>
+    <label class="block text-sm font-normal text-black mb-2">Message</label>
+    <textarea name="entry.1412344105" rows="4" class="form-input text-black" placeholder="Describe your election scenario..." required></textarea>
+</div>
+                            
+                            <button type="submit" class="w-full bg-slate-900 hover:bg-primary text-white font-black py-4 rounded-xl shadow-xl transition-all hover:-translate-y-1 mt-4 text-lg">
+                                Submit Campaign Request
+                            </button>
+                        </form>
+
+                        <div id="success-msg" class="hidden mt-8 p-6 bg-green-50 text-green-700 rounded-2xl text-center font-bold border border-green-200">
+                            <i class="fas fa-check-circle text-4xl mb-3 block"></i> 
+                            Message Sent Successfully! <br><span class="font-medium text-sm text-green-600">Our election strategists will call you soon.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="py-20 relative bg-gradient-to-r from-primary to-blue-800 text-white text-center">
+        <div class="max-w-4xl mx-auto px-4 relative z-10" data-aos="zoom-in">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Win Your Election?</h2>
+            <p class="text-xl text-blue-100 mb-10">Join hands with FeedManthan and start your digital domination today.</p>
+            <a href="contact.html" class="bg-secondary hover:bg-orange-600 text-white px-10 py-4 rounded-full text-lg font-bold shadow-xl transition-all hover:scale-105 inline-block">Start Your Campaign</a>
+        </div>
+    </section>
+
+    <!-- 🎥 WHATSAPP BANNER CTA -->
+    <section class="py-16 bg-gradient-to-r from-green-500 to-green-700 text-white text-center">
+        <div class="max-w-4xl mx-auto px-4" data-aos="zoom-in">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">Need Immediate Assistance?</h2>
+            <p class="text-xl text-green-100 mb-10 font-semibold">Message us directly on WhatsApp to get a custom roadmap for your constituency.</p>
+            <a href="https://wa.me/917780020613?text=Hi" target="_blank" class="bg-white text-green-600 hover:bg-slate-50 px-10 py-5 rounded-full text-xl font-black shadow-2xl transition-all hover:scale-105 inline-flex items-center gap-4">
+                <i class="fab fa-whatsapp text-3xl"></i> Chat on WhatsApp Now
+            </a>
+        </div>
+    </section>
+
+    <!-- 🦶 FOOTER OVERHAUL -->
+    <footer class="bg-slate-950 text-slate-400 pt-16 border-t border-slate-900 border-t-4 border-t-primary">
+        <!-- Footer Top Menu -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-800 pb-10 mb-10 overflow-x-auto">
+            <div class="flex sm:flex-wrap items-center justify-center gap-6 md:gap-10 text-xs md:text-sm font-bold text-slate-300 min-w-max">
+                <a href="#hero" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-home"></i> Home</a>
+                <a href="#about" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-book-open"></i> Our Story</a>
+                <a href="#team" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-user-tie"></i> Team</a>
+                <a href="#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-tags"></i> Packages</a>
+                <a href="contact.html" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-headset"></i> Support</a>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <!-- Brand Column -->
+            <div class="col-span-1 sm:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="font-black text-3xl text-primary tracking-tight"><i class="fas fa-bullhorn text-secondary mr-2"></i>Feed<span class="text-secondary text-gradient">Manthan</span></span>
+                </div>
+                <p class="text-sm leading-relaxed mb-8 max-w-md text-slate-400 font-medium font-sans">
+                    India’s premier digital-first Marketing and Election Management agency. We engineer digital movements that shift public perception and drive tangible polling results. Victory is not a chance, it's a strategically executed algorithm.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all shadow-md"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all shadow-md"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all shadow-md"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition-all shadow-md"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <!-- Quick Links Column -->
+            <div>
+                <h4 class="text-white font-black mb-6 uppercase tracking-widest text-sm relative inline-block">Policies<span class="absolute bottom-[-8px] left-0 w-1/2 h-0.5 bg-primary rounded-full"></span></h4>
+                <ul class="space-y-4 text-sm font-semibold text-slate-400">
+                    <li><a href="privacy.html" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Privacy Policy</a></li>
+                    <li><a href="disclaimer.html" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Disclaimer</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Terms of Service</a></li>
+                    <li><a href="#feedback" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Client Reviews</a></li>
+                </ul>
+            </div>
+
+            <!-- Services Column -->
+            <div>
+                <h4 class="text-white font-black mb-6 uppercase tracking-widest text-sm relative inline-block">Services<span class="absolute bottom-[-8px] left-0 w-1/2 h-0.5 bg-primary rounded-full"></span></h4>
+                <ul class="space-y-4 text-sm font-semibold text-slate-400">
+                    <li><a href="#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Ward Member Setup</a></li>
+                    <li><a href="#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Mukhiya Campaign</a></li>
+                    <li><a href="#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Zila Parishad Power</a></li>
+                    <li><a href="#pricing" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs text-secondary"></i> Video & Drone Shoots</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Footer Banner -->
+        <div class="bg-black py-8 border-t border-slate-900 border-t-2 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs font-semibold text-slate-500">
+                <p class="mb-4 md:mb-0 text-center md:text-left">&copy; 2024-26 FeedManthan Digital Election Management. All rights reserved.</p>
+                <p class="text-slate-500 bg-slate-900 px-5 py-2.5 rounded-full shadow-inner border border-slate-800 text-center md:text-right">Platform Engineered by <span class="text-secondary font-black tracking-widest ml-1 text-sm">Prem Raj Anand</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init Intersect Animations
+        AOS.init({ once: true, offset: 50, duration: 800 });
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        });
+
+        // Navbar Sticky Logic
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass', 'shadow-sm', 'py-2');
+                navbar.classList.remove('transparent', 'py-4');
+            } else {
+                navbar.classList.add('transparent', 'py-4');
+                navbar.classList.remove('glass', 'shadow-sm', 'py-2');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
+
+        // Generate Feedback Slider (20 Items) - Bihar Political Edition
+const track = document.getElementById('testimonial-track');
+const fdData = [
+    {n: "Ram Pravesh Rai", l: "Mukhia - Vaishali", t: "FeedManthan ke digital prachaar se hamara vote bank ekdum se badh gaya. Graphics aur video ka jawab nahi!"},
+    {n: "Suraj Yadav", l: "MLA Supporter", t: "Bhaiya ke rally ka jo mahaul in logo ne banaya, vipakshi party ekdum baith gayi. Best service in Bihar!"},
+    {n: "Suman Devi", l: "Zila Parishad Candidate", t: "Pehli baar laga ki mahila umeedwar bhi digital wave chala sakti hai. WhatsApp strategy kamaal ki hai."},
+    {n: "Vikram Paswan", l: "IT Cell Incharge", t: "Humne inki madad se booth level tak data mapping ki. Election jeetne mein asli madad wahi se mili."},
+    {n: "Manoj Singh", l: "Panchayat Samiti", t: "Posters aur banners ke designs ekdum premium hote hain. Patna ke market mein inse behtar koi nahi."},
+    {n: "Pankaj Mahto", l: "MP PA", t: "Social media management se lekar ground campaign tak, FeedManthan ne pura zila cover kiya."},
+    {n: "Neha Kumari", l: "Youth Leader", t: "Insta reels aur meme pages wala idea hit ho gaya! Yuva voters ekdum connect ho gaye."},
+    {n: "Sanjay Gupta", l: "Ward Member", t: "Chote level ke election ko bhi itna bada bana diya, pura ward mein danka baj raha hai."},
+    {n: "Ravi Shankar", l: "Social Media Cell", t: "Video editing mein Bihar ka sabse best kaam hai inka. Speeches ekdum viral ho rahi hain."},
+    {n: "Arvind Thakur", l: "Pratinidhi", t: "24 ghante support milta hai. Raat mein bhi koi update ho toh team turant response deti hai."},
+    {n: "Dinesh Sahani", l: "Supporter", t: "Drone coverage aur live streaming ne sabka dil jeet liya. Ekdum digital chunav raha."},
+    {n: "Pooja Singh", l: "Mahila Morcha Head", t: "Inki strategy bahut clear hai. Bina faltu kharch ke sahi logo tak baat pahuchate hain."},
+    {n: "Ranjeet Yadav", l: "Mukhiya Pati", t: "Gaon-gaon mein hamara prachaar pahucha. Hum toh suggest karenge sabko yahi use karne ko."},
+    {n: "Amit Mishra", l: "Media Team", t: "Content writing aur captions ekdum local bhasha mein hote hain, jo logo ko touch karte hain."},
+    {n: "Deepak Kumar", l: "Booth Adhyaksh", t: "Election management software aur data mapping se bahut fayda hua. Target voting badh gayi."},
+    {n: "Sunita Devi", l: "Sarpanch Candidate", t: "Mera digital profile itna accha banaya ki party high command ne khud phone kiya."},
+    {n: "Rahul Sahni", l: "IT Cell Head", t: "War Mode strategy ne saare fake news ko counter karne mein bahut help ki. Highly active team."},
+    {n: "Birendra Paswan", l: "MLA Office Staff", t: "Professionalism aur timing inka sabse bada plus point hai. Har cheez time par delivery hoti hai."},
+    {n: "Gaurav Pandey", l: "Campaign Manager", t: "Jeetne ke baad bhi jo perception maintain kiya hai, usse leader ki image bahut chamki hai."},
+    {n: "Shambhu Nath", l: "Local Influencer", t: "Inki digital wave ke aage koi nahi tik paya. Har phone mein hamara prachaar tha."}
+];
+
+let htmlContent = '';
+fdData.forEach((item, index) => {
+    // Har item ke liye alag Indian image fetch karne ke liye index ka use
+    const imgUrl = `https://loremflickr.com/150/150/indian,person,face/all?lock=${index + 50}`;
+    
+    htmlContent += `
+    <div class="testimonial-card bg-white p-6 rounded-3xl border border-slate-200 shadow-xl flex-shrink-0 mx-4 flex flex-col justify-between" style="width: 320px; min-height: 280px; height: 100%;">
+        <div>
+            <div class="flex items-center gap-4 mb-4">
+                <img src="${imgUrl}" 
+                     class="w-14 h-14 rounded-full object-cover border-2 border-primary" 
+                     alt="Bihari Leader"
+                     onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(item.n)}&background=random'">
+                <div>
+                    <h4 class="font-bold text-black text-base leading-tight">${item.n}</h4>
+                    <p class="text-[10px] text-blue-700 font-black uppercase tracking-wider mt-1">${item.l}</p>
+                </div>
+            </div>
+            <p class="text-xs text-yellow-500 mb-2 tracking-widest">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </p>
+            <p class="text-sm text-black font-medium leading-snug italic overflow-hidden whitespace-normal">
+                "${item.t}"
+            </p>
+        </div>
+    </div>`;
+});
+
+track.innerHTML = htmlContent + htmlContent;
+        // Form Submit Logic
+        let submitted = false;
+        function showSuccess() {
+            document.querySelector('#main-form form').style.display = 'none';
+            document.getElementById('success-msg').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
