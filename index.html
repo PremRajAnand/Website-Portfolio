@@ -131,6 +131,12 @@
         
         /* Preloader */
         #loader { transition: opacity 0.5s ease; z-index: 9999; }
+        /* Google Translate specific overrides */
+        body > .skiptranslate { display: none !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-te-gadget { color: transparent !important; font-size: 0px !important; }
+        .goog-te-gadget .goog-te-combo { color: #1e293b !important; padding: 4px 8px; border-radius: 8px; font-size: 13px; font-weight: bold; border: 2px solid #cbd5e1; outline: none; background: white; cursor: pointer; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased relative">
@@ -173,11 +179,19 @@
                     <a href="contact.html" class="bg-gradient-to-r from-primary to-blue-700 text-white px-6 py-2.5 rounded-full hover:shadow-lg hover:shadow-primary/30 transition-all">Contact Us</a>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-800 hover:text-primary focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <!-- Translater Custom Toggle -->
+                    <button id="custom-translate-btn" onclick="triggerGoogleTranslate()" class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-full outline-none transition-colors border border-slate-300 shadow-sm cursor-pointer ml-2">
+                        <i class="fas fa-language text-lg text-primary"></i> <span class="font-bold text-sm">Hinglish / Eng</span>
                     </button>
+                    <div id="google_translate_element" style="position:absolute; left:-9999px;"></div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="lg:hidden flex items-center">
+                        <button id="mobile-menu-btn" class="text-slate-800 hover:text-primary focus:outline-none">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -241,12 +255,12 @@
                     </div>
                 </div>
                 
-                <div class="relative lg:h-[600px] flex items-center justify-center animate-float" data-aos="zoom-in" data-aos-duration="1200">
-                    <div class="relative bg-white rounded-3xl shadow-2xl p-3 border border-slate-100 transform rotate-2 max-w-lg w-full">
+                <div class="relative lg:h-[600px] flex items-center justify-center animate-float w-full" data-aos="zoom-in" data-aos-duration="1200">
+                    <div class="relative bg-white rounded-3xl shadow-2xl p-3 border border-slate-100 max-w-lg w-[90%] md:w-full mx-auto">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Dashboard Template" class="rounded-2xl w-full object-cover shadow-inner">
                         
                         <!-- Floating Glass Card 1 -->
-                        <div class="hidden sm:block absolute -bottom-8 -left-8 glass p-5 rounded-2xl shadow-2xl w-56 border border-white/50">
+                        <div class="hidden md:block absolute -bottom-6 -left-10 glass p-5 rounded-2xl shadow-2xl w-56 border border-white/50 z-10">
                             <div class="flex items-center gap-4 mb-3">
                                 <div class="w-10 h-10 rounded-full bg-green-100 text-green-500 flex items-center justify-center"><i class="fas fa-arrow-up"></i></div>
                                 <div><p class="text-xs text-slate-500 font-bold">Voter Reach</p><p class="text-lg font-black text-slate-800">+248%</p></div>
@@ -255,7 +269,7 @@
                         </div>
                         
                         <!-- Floating Glass Card 2 -->
-                        <div class="hidden sm:flex absolute -top-8 -right-8 glass p-4 rounded-2xl shadow-2xl border border-white/50 items-center gap-3">
+                        <div class="hidden md:flex absolute -top-6 -right-6 glass p-4 rounded-2xl shadow-2xl border border-white/50 items-center gap-3 z-10">
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-primary text-xl">
                                     <i class="fas fa-thumbs-up"></i>
@@ -897,40 +911,43 @@
                             <li class="flex gap-3"><i class="fas fa-check text-purple-500 mt-0.5"></i> Automated Troll Defense Workflows</li>
                             <li class="flex gap-3"><i class="fas fa-check text-purple-500 mt-0.5"></i> Campaign Strategy Planning</li>
                         </ul>
+                        <a href="contact.html" class="block text-center bg-slate-700 hover:bg-purple-600 text-white font-black py-4 rounded-2xl transition-all w-full mt-auto">Buy Setup Details</a>
                     
                     </div>
                 </div>
                 <div class="text-center pt-20 mb-12">
                      <p class="text-gray-400">📌 Ads & Promotion:- Our Ads & Promotion strategy focuses on maximizing your reach through expert paid campaign management and Precision Targeting based on location, caste, and voter demographics to ensure your message hits the right audience. Please note that the actual ad spend is not included in the package, allowing you the flexibility to adjust the budget according to your specific campaign needs and scale.</p>
                 </div>
-            </div>
-
-    <!-- ⭐ CUSTOMER FEEDBACK -->
-    <section id="feedback" class="py-24 bg-white overflow-hidden relative">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-                <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Success Stories</span>
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">What Leaders <span class="text-primary">Say</span></h2>
-                <div class="h-1.5 w-24 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
-            </div>
-
-            <div class="relative w-full h-[320px] overflow-hidden" id="testimonial-container">
-                <div class="flex gap-6 animate-scroll absolute whitespace-nowrap px-4 items-stretch" id="testimonial-track">
-                    <!-- Testimonials will be injected via JS -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 📄 DISCLAIMER PAGE SECTION -->
-    <section id="disclaimer" class="py-20 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-6 text-slate-600 text-sm leading-relaxed" data-aos="fade-up">
-            <h2 class="text-3xl font-black text-slate-900 mb-6 border-b pb-4">Disclaimer</h2>
-            <p class="mb-4">The information provided by Feed Manthan ("we," "us," or "our") on this website is for general informational and marketing purposes only. While we strive to provide accurate information, we make no representation regarding the absolute completeness of any strategy.</p>
-            <p class="mb-4"><strong>Professional Results:</strong> Past performance in previous elections (like Bihar Vidhan Sabha) is not a guarantee of future success. Election outcomes depend on numerous external parameters like public sentiment and voting day conditions.</p>
-            <p><strong>Pricing:</strong> Prices mentioned in packages are estimations and base rates. Actual costs may fluctuate depending on the geographical scope, candidate profile baseline, and immediate urgency.</p>
-        </div>
-    </section>
+            <!-- ⭐ CUSTOMER FEEDBACK -->
+            <section id="feedback" class="py-24 bg-white overflow-hidden relative">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                        <span class="text-secondary font-black tracking-widest text-sm uppercase mb-2 block">Success Stories</span>
+                        <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">What Leaders <span class="text-primary">Say</span></h2>
+                        <div class="h-1.5 w-24 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                    </div>
+
+                    <div class="relative w-full h-[320px] overflow-hidden" id="testimonial-container">
+                        <div class="flex gap-6 animate-scroll absolute whitespace-nowrap px-4 items-stretch" id="testimonial-track">
+                            <!-- Testimonials will be injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 📄 DISCLAIMER PAGE SECTION -->
+            <section id="disclaimer" class="py-20 bg-slate-50 border-t border-slate-200">
+                <div class="max-w-4xl mx-auto px-6 text-slate-600 text-sm leading-relaxed" data-aos="fade-up">
+                    <h2 class="text-3xl font-black text-slate-900 mb-6 border-b pb-4">Disclaimer</h2>
+                    <p class="mb-4">The information provided by Feed Manthan ("we," "us," or "our") on this website is for general informational and marketing purposes only. While we strive to provide accurate information, we make no representation regarding the absolute completeness of any strategy.</p>
+                    <p class="mb-4"><strong>Professional Results:</strong> Past performance in previous elections (like Bihar Vidhan Sabha) is not a guarantee of future success. Election outcomes depend on numerous external parameters like public sentiment and voting day conditions.</p>
+                    <p><strong>Pricing:</strong> Prices mentioned in packages are estimations and base rates. Actual costs may fluctuate depending on the geographical scope, candidate profile baseline, and immediate urgency.</p>
+                </div>
+            </section>
 
     <!-- 🔒 PRIVACY POLICY SECTION -->
     <section id="privacy" class="py-20 bg-white border-t border-slate-200">
@@ -1096,13 +1113,28 @@
         <div class="bg-black py-8 border-t border-slate-900 border-t-2 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs font-semibold text-slate-500">
                 <p class="mb-4 md:mb-0 text-center md:text-left">&copy; 2024-26 FeedManthan Digital Election Management. All rights reserved.</p>
-                <p class="text-slate-500 bg-slate-900 px-5 py-2.5 rounded-full shadow-inner border border-slate-800 text-center md:text-right">Platform Engineered by <span class="text-secondary font-black tracking-widest ml-1 text-sm">Prem Raj Anand</span></p>
+                <p class="text-slate-500 bg-slate-900 px-5 py-2.5 rounded-full shadow-inner border border-slate-800 text-center md:text-right">Designed by <span class="text-secondary font-black tracking-widest ml-1 text-sm">Prem Raj Anand</span></p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'hi,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        function triggerGoogleTranslate() {
+            var selectBox = document.querySelector('select.goog-te-combo');
+            if (selectBox) {
+                selectBox.value = (selectBox.value === 'hi') ? 'en' : 'hi';
+                selectBox.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+            } else {
+                alert("Please wait 2 seconds for the translation engine to load before pressing.");
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         // Init Intersect Animations
         AOS.init({ once: true, offset: 50, duration: 800 });
